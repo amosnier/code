@@ -102,7 +102,7 @@ GlWindow::GlWindow()
 	// Done with the visual info data
 	XFree(vi);
  
-	XStoreName(display, win, "GL 3.0 Window");
+	XStoreName(display, win, "OpenGL test");
  
 	std::cout << "Mapping window" << std::endl;
 	XMapWindow(display, win);
@@ -186,6 +186,11 @@ GlWindow::GlWindow()
  
 	std::cout << "Making context current" << std::endl;
 	glXMakeCurrent(display, win, ctx);
+
+	// Initialize GLEW to make the whole of OpenGL available
+	GLenum err = glewInit();
+	if (err != GLEW_OK)
+		throw std::runtime_error(CONTEXT(reinterpret_cast<const char*>(glewGetErrorString(err))));
 }
 
 GlWindow::~GlWindow()
@@ -200,27 +205,11 @@ GlWindow::~GlWindow()
 
 void GlWindow::test()
 {
-	glClearColor(0, 0.5, 1, 0.5);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glXSwapBuffers(display, win);
- 
-	sleep(1);
- 
-	glClearColor(1, 0.5, 0, 0.5);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glXSwapBuffers(display, win);
- 
-	sleep(1);
-
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
-		throw std::runtime_error(CONTEXT(reinterpret_cast<const char*>(glewGetErrorString(err))));
-
 	static const GLfloat red[] = {1.0, 0.0, 0.0, 1.0};
 	glClearBufferfv(GL_COLOR, 0, red);
 	glXSwapBuffers(display, win);
 
-	sleep(1);
+	sleep(5);
 }
 
 // Helper to check for extension string presence.  Adapted from:
