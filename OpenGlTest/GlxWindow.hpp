@@ -1,10 +1,10 @@
 #include <GL/glew.h>
 #include <GL/glx.h>
 
-class GlWindow {
+class GlxWindow {
 public:
-	GlWindow();
-	~GlWindow();
+	GlxWindow();
+	~GlxWindow();
 	void test();
 private:
 	static bool isExtensionSupported(const char *extList, const char *extension);

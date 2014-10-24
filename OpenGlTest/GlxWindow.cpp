@@ -1,16 +1,30 @@
 #include <cstring>
 #include <unistd.h>
 #include <iostream>
+#include <cmath>
 
 #include "Common.hpp"
 
-#include "GlWindow.hpp"
+#include "GlxWindow.hpp"
 
 typedef GLXContext (*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
 
-bool GlWindow::ctxErrorOccurred = false;
+bool GlxWindow::ctxErrorOccurred = false;
  
-GlWindow::GlWindow()
+void GlxWindow::test()
+{
+	GLfloat color[] = {0.0, 0.0, 0.0, 1.0};
+
+	for (float i = 0; i < 1000000; i++) {
+		color[0] = sin(i/10) * 0.5 + 0.5;
+		color[1] = cos(i/10) * 0.5 + 0.5;
+		glClearBufferfv(GL_COLOR, 0, color);
+		glXSwapBuffers(display, win);
+	}
+
+}
+
+GlxWindow::GlxWindow()
 {
 	display = XOpenDisplay(nullptr);
  
@@ -193,7 +207,7 @@ GlWindow::GlWindow()
 		throw std::runtime_error(CONTEXT(reinterpret_cast<const char*>(glewGetErrorString(err))));
 }
 
-GlWindow::~GlWindow()
+GlxWindow::~GlxWindow()
 {
 	glXMakeCurrent(display, 0, 0 );
 	glXDestroyContext(display, ctx );
@@ -203,18 +217,9 @@ GlWindow::~GlWindow()
 	XCloseDisplay(display );
 }
 
-void GlWindow::test()
-{
-	static const GLfloat red[] = {1.0, 0.0, 0.0, 1.0};
-	glClearBufferfv(GL_COLOR, 0, red);
-	glXSwapBuffers(display, win);
-
-	sleep(5);
-}
-
 // Helper to check for extension string presence.  Adapted from:
 //   http://www.opengl.org/resources/features/OGLextensions/
-bool GlWindow::isExtensionSupported(const char *extList, const char *extension)
+bool GlxWindow::isExtensionSupported(const char *extList, const char *extension)
 {
 	const char *start;
 	const char *where, *terminator;
@@ -245,7 +250,7 @@ bool GlWindow::isExtensionSupported(const char *extList, const char *extension)
 	return false;
 }
  
-int GlWindow::ctxErrorHandler( Display *dpy, XErrorEvent *ev )
+int GlxWindow::ctxErrorHandler( Display *dpy, XErrorEvent *ev )
 {
 	ctxErrorOccurred = true;
 	return 0;

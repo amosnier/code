@@ -1,8 +1,8 @@
-#include "GlWindow.hpp"
+#include "GlxWindow.hpp"
  
 int main(int argc, char* argv[])
 {
-  GlWindow gw;
+  GlxWindow gw;
 
   gw.test();
  
