@@ -5,11 +5,7 @@
  *   RAM.ORIGIN: starting address of RAM bank 0
  *   RAM.LENGTH: length of RAM bank 0
  */
-MEMORY
-{
-  FLASH (rx) : ORIGIN = 0x0, LENGTH = 0x20000 /* 128K */
-  RAM (rwx) : ORIGIN = 0x10000000, LENGTH = 0x2000 /* 8K */
-}
+INCLUDE "mem.ld"
 
 /* Linker script to place sections and symbol values. Should be used together
  * with other linker script that defines memory regions FLASH and RAM.
