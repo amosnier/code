@@ -25,6 +25,9 @@
 ;; Enable Semantic
 (semantic-mode 1)
 
+;; Python includes
+(semantic-add-system-include " /usr/lib/python3.4" 'python-mode)
+
 ;; Enable EDE (Project Management) features
 (global-ede-mode 1)
 
