@@ -25,8 +25,11 @@
 ;; Enable Semantic
 (semantic-mode 1)
 
-;; Python includes
-(semantic-add-system-include " /usr/lib/python3.4" 'python-mode)
+;; semantic hooks
+(defun semantic-hook ()
+  ;; Python includes
+  (semantic-add-system-include "/usr/lib/python3.4" 'python-mode))
+(add-hook 'semantic-init-hooks 'semantic-hook)
 
 ;; Enable EDE (Project Management) features
 (global-ede-mode 1)
