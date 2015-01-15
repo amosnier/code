@@ -2,4 +2,6 @@
 *.d
 *.axf
 *.map
+*~
 OpenGlTest/OpenGlTest
+
