@@ -1,1 +1,1 @@
-#Minimmalist bare metal programming from scratch
+#Minimalist bare metal programming from scratch
