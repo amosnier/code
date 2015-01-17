@@ -4,5 +4,5 @@
 *.map
 *~
 OpenGlTest/OpenGlTest
-bare/datasheets
+bare/datasheets/*.pdf
 /bare/orig/orig.S
