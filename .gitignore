@@ -1,8 +1,10 @@
 *.o
 *.d
 *.axf
+*.elf
 *.map
 *~
 OpenGlTest/OpenGlTest
 bare/datasheets/*.pdf
 /bare/orig/orig.S
+
