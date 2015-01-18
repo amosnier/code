@@ -1,6 +1,10 @@
 	.syntax	unified
 	.arch	armv7e-m
 
+	/*
+	 * The vector table is at adress 0, pointing by hardware to
+	 * the begining of flash, i.e. 0x08000000.
+	 */
 	.section .vector_table
 	.int	_stack_pointer  /* Main stack pointer at reset */
 	.int	main	        /* Reset handler */
@@ -22,9 +26,9 @@
 
 	.text
 	
-	.thumb_func /* Necessary for LSB to 1 in vector entry */
+	.thumb_func /* Necessary for LSB to 1 in vector entry pointing here */
 main:
-	b .
+	b . /* Branch to current address */
 	
 	.thumb_func
 default_handler:

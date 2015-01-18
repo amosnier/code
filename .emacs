@@ -31,6 +31,9 @@
 (define-key global-map [f7] 'next-error)
 (define-key global-map [f8] 'magit-status)
 
+;; GDB command
+(setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
 ;; This hack fixes indentation for C++11's "enum class" in Emacs.
