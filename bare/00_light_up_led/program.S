@@ -1,13 +1,14 @@
-	.syntax	unified
+	.syntax	unified /* Latest GNU AS syntax for ARM */
 	.arch	armv7e-m
 
 	/*
-	 * The vector table is at adress 0, pointing by hardware to
-	 * the begining of flash, i.e. 0x08000000.
+	 * The vector table needs its own section in order to be emitted at
+	  * adress 0, pointing by hardware to the begining of flash, i.e.
+	  * 0x08000000.
 	 */
 	.section .vector_table
 	.int	_stack_pointer  /* Main stack pointer at reset */
-	.int	main	        /* Reset handler */
+	.int	reset_handler	/* Reset handler */
 	.int	default_handler /* NMI handler */
 	.int	default_handler /* HardFault handler */
 	.int	default_handler /* MemManage handler */
@@ -27,7 +28,7 @@
 	.text
 	
 	.thumb_func /* Necessary for LSB to 1 in vector entry pointing here */
-main:
+reset_handler:
 	/*
 	 * Write 8 (IO port D clock enabled) to address 0x4002 3830 (RCC AHB1
 	 * peripheral clock enable register).

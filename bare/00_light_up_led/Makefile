@@ -4,16 +4,13 @@ CROSS_COMPILE = arm-none-eabi-
 CC = $(CROSS_COMPILE)gcc
 LD = $(CROSS_COMPILE)ld
 
-CCFLAGS = -mthumb -mcpu=cortex-m4 -g
-ASFLAGS = $(CCFLAGS)
-LDFLAGS = -T script.ld
+ASFLAGS = -mthumb -mcpu=cortex-m4 -g
+CFLAGS = $(ASFLAGS)
+LDFLAGS = -nostartfiles -T script.ld
 
 .PHONY: all
-all: $(EXE).elf
-
-%.elf: %.o
-	$(LD) $(LDFLAGS) $^ -o $@
+all: $(EXE)
 
 .PHONY: clean
 clean:
-	rm -f *.elf *.o *.s *~
+	rm -f $(EXE) *.o *.s *~
