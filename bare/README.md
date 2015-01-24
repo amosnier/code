@@ -25,9 +25,9 @@ that the binary has the correct layout or understand what the compiler is doing.
 - GDB in Emacs is not as intuitive as in Eclipse, but it is less complicated to
 set up and quite powerful with symbolic breakpoints, etc. I use directives in
 .emacs and .gdbinit to ease the startup and automate openOCD's start and
-connection (see https://github.com/amosnier/code, I have symboliv c links to
-these file in my home directory). I very often use the following commands under
-gdb:
+connection (see [code](https://github.com/amosnier/code), I have symbolic links
+to these file in my home directory). I very often use the following commands
+under gdb:
   - monitor reset halt (ask OpenOCD to reset the target)
   - load (write the binary to flash).
   - continue (run the program to the next breakpoint or until I break by C-C
