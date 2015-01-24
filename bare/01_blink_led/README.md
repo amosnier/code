@@ -1,9 +1,11 @@
 #Blink LED
+
 ##Background
 The idea of this application is to build on top of the previous light up LED
 project, developing it in two ways:
 - Let the reset handler branch to C code as soon as possible.
 - Let the C code blink the LED at an arbitrary but visible fixed frequency.
+
 ##C-runtime environment
 In order to support C's features, C compilers and linkers assume the presence of
 a stack, a so-called BSS-segment in RAM (static variables initialized to zero)
