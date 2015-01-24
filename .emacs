@@ -30,6 +30,8 @@
 (define-key global-map [f6] 'recompile)
 (define-key global-map [f7] 'next-error)
 (define-key global-map [f8] 'magit-status)
+(define-key global-map [f9] 'gdb)
+(define-key global-map [f10] 'gdb-many-windows)
 
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
