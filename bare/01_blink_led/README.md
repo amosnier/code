@@ -1,11 +1,16 @@
-#Light up LED
+#Blink LED
 ##Background
-The idea of this application is to light up a LED on the board and enter a for
-ever loop. The code is written in assembly language. If the correct LED is lit
-forever when running the application, it will be considered successful.
-##Which LED?
-We use the board's datasheet to select and locate the LED. We select LD3, which
-is orange and "connected to the I/O PD13 of the STM32F407VGT6".
-We use the MCU's datasheet and reference manual to understand how we can control
-I/O PD13 by software. PD13 is bit 13 in GPIO port D.
-See comments in program.S.
+The idea of this application is to build on top of the previous light up LED
+project, developing it in two ways:
+- Let the reset handler branch to C code as soon as possible.
+- Let the C code blink the LED at an arbitrary but visible fixed frequency.
+##C runtime environment
+In order to support C's features, C compilers and linkers assume the presence of
+a stack, a so-called BSS-segment in RAM (static variables initialized to zero)
+and a data segment, also in RAM. This is usually performed by some library files
+delivered with the compiler and linked in the executable (e.g. crt0.o).
+We do initialize the stack pointer to the top of the RAM (it grows downwards),
+by emitting that address to at address 0 as required for Cortex-M4, but since we
+do not so far need any static in RAM, we decide to simplify the linker script by
+skipping the BSS and data segments. In order to achieve this, we invoke gcc with
+the option -nostartfiles.
