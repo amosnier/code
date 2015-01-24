@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-static void led_config();
+static void led_config(void);
 static void led_on(void);
 static void led_off(void);
 static void busy_wait(void);
