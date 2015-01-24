@@ -9,8 +9,9 @@ project, developing it in two ways:
 ##C-runtime environment
 In order to support C's features, C compilers and linkers assume the presence of
 a stack, a so-called BSS-segment in RAM (static variables initialized to zero)
-and a data segment, also in RAM. This is usually performed by some library files
-delivered with the compiler and linked in the executable (e.g. crt0.o).
+and a data segment, also in RAM. Code using these is usually located by some
+library files delivered with the compiler and linked in the executable
+(e.g. crt0.o).
 We do initialize the stack pointer to the top of the RAM (it grows downwards),
 by emitting that address to at address 0 as required for Cortex-M4, but since we
 do not so far need any static in RAM, we decide to simplify the linker script by
