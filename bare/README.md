@@ -31,5 +31,5 @@ to these file in my home directory). I very often use the following commands
 under gdb:
   - monitor reset halt (ask OpenOCD to reset the target)
   - load (write the binary to flash).
-  - continue (run the program to the next breakpoint or until I break by C-C
-  C-C)
+  - continue (run the program to the next breakpoint or until I break by C-c
+  C-c)
