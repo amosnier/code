@@ -14,6 +14,6 @@ library files delivered with the compiler and linked in the executable
 (e.g. crt0.o).
 We do initialize the stack pointer to the top of the RAM (it grows downwards),
 by emitting that address to at address 0 as required for Cortex-M4, but since we
-do not so far need any static in RAM, we decide to simplify the linker script by
-skipping the BSS and data segments. In order to achieve this, we invoke gcc with
-the option -nostartfiles.
+do not so far need any static variable in RAM, we decide to simplify the linker
+script by skipping the BSS and data segments. In order to achieve this, we
+invoke gcc with the option -nostartfiles.
