@@ -28,4 +28,5 @@ the compiler). That code will be present even for functions that have no
 parameters or local variables (such as the ones we use in this application).
 That is what explains that the code generated for functions in this application
 is slightly more than a translation of the C-code in the function. That is also
-why we explicitly reset the frame pointer to NULL in the assemby reset handler.
+why we explicitly reset the frame pointer to NULL in the assemby reset handler
+(this can be considered as a part of setting up the C-runtime environment).
