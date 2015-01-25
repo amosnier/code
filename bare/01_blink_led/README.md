@@ -18,7 +18,8 @@ by emitting that address to at address 0 as required for Cortex-M4, but since we
 do not so far need any static variable in RAM, we decide to simplify the linker
 script by skipping the BSS and data segments. In order to achieve this, we
 invoke gcc with the option -nostartfiles. This way, the binary is composed of
-our code and nothing more.
+our code and nothing more (almost nothing more in fact, see "Frame pointer"
+below).
 
 ##Frame pointer
 The frame pointer is a pointer to a frame in the stack that is itself pushed on
