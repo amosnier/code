@@ -12,6 +12,6 @@ SECTIONS
 		*(.text)
 	} > flash
 
-	/* The linker makes every symbol that get a value global. */
+	/* The linker makes every symbol that gets a value global. */
 	_stack_pointer = ORIGIN(ram) + LENGTH(ram);
 }
