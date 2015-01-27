@@ -3,7 +3,7 @@ void SystemInit()
 {}
 #endif
 
-void main()
+int main()
 {
 	for (;;);
 }

@@ -1,3 +1,9 @@
+/* This is a copy/paste of the gcc.ld linker script from the samples in the GNU
+ * toolchain from ARM, except for the memory configuration that is included
+ * from an adapted mem.ld, instead of being reproduced inside the file.
+ * Alain Mosnier, 2015
+ */
+
 INCLUDE "mem.ld"
 
 /* Linker script to place sections and symbol values. Should be used together
@@ -39,8 +45,8 @@ SECTIONS
 		KEEP(*(.isr_vector))
 		*(.text*)
 
-		*(.init)
-		*(.fini)
+		KEEP(*(.init))
+		KEEP(*(.fini))
 
 		/* .ctors */
 		*crtbegin.o(.ctors)
@@ -58,7 +64,7 @@ SECTIONS
 
 		*(.rodata*)
 
-		*(.eh_frame*)
+		KEEP(*(.eh_frame*))
 	} > FLASH
 
 	.ARM.extab : 
@@ -118,25 +124,25 @@ SECTIONS
 		. = ALIGN(4);
 		/* preinit data */
 		PROVIDE_HIDDEN (__preinit_array_start = .);
-		*(.preinit_array)
+		KEEP(*(.preinit_array))
 		PROVIDE_HIDDEN (__preinit_array_end = .);
 
 		. = ALIGN(4);
 		/* init data */
 		PROVIDE_HIDDEN (__init_array_start = .);
-		*(SORT(.init_array.*))
-		*(.init_array)
+		KEEP(*(SORT(.init_array.*)))
+		KEEP(*(.init_array))
 		PROVIDE_HIDDEN (__init_array_end = .);
 
 
 		. = ALIGN(4);
 		/* finit data */
 		PROVIDE_HIDDEN (__fini_array_start = .);
-		*(SORT(.fini_array.*))
-		*(.fini_array)
+		KEEP(*(SORT(.fini_array.*)))
+		KEEP(*(.fini_array))
 		PROVIDE_HIDDEN (__fini_array_end = .);
 
-		*(.jcr)
+		KEEP(*(.jcr*))
 		. = ALIGN(4);
 		/* All data end */
 		__data_end__ = .;
@@ -163,14 +169,16 @@ SECTIONS
 
 	/* .stack_dummy section doesn't contains any symbols. It is only
 	 * used for linker to calculate size of stack sections, and assign
-	 * values to stack symbols later */
+	 * values to stack symbols later
+	 */
 	.stack_dummy (COPY):
 	{
 		*(.stack*)
 	} > RAM
 
 	/* Set stack top to end of RAM, and stack limit move down by
-	 * size of stack_dummy section */
+	 * size of stack_dummy section
+         */
 	__StackTop = ORIGIN(RAM) + LENGTH(RAM);
 	__StackLimit = __StackTop - SIZEOF(.stack_dummy);
 	PROVIDE(__stack = __StackTop);

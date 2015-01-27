@@ -1,9 +1,8 @@
 *.o
 *.d
-*.axf
 *.map
 *~
-OpenGlTest/OpenGlTest
 bare/datasheets/*.pdf
 /bare/orig/orig.S
-program
+app
+/bare/apps/01_blink_led/app
