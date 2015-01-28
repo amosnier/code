@@ -20,7 +20,7 @@ Processors) 7.8.1.20141128-cvs
 - ARM cross toolchain: GNU Tools for ARM Embedded Processors 4.9-2014-q4-major
 
 ##Tips
-- I find the command "arm-none-eabi-objdump -m _binary_" invaluable to check
+- I find the command "arm-none-eabi-objdump -d _binary_" invaluable to check
 that the binary has the correct layout or understand what the compiler is doing.
 - GDB in Emacs is not as intuitive as in Eclipse, but it is less complicated to
 set up and quite powerful with symbolic breakpoints, etc. Also, the Emacs based
