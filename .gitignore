@@ -6,3 +6,4 @@ bare/datasheets/*.pdf
 /bare/orig/orig.S
 app
 /bare/apps/01_blink_led/app
+/bare/dox/*/html
