@@ -2,9 +2,32 @@ CC = arm-none-eabi-gcc
 
 EXE = app
 
-BASE=../..
+# Directories
+BASE = ../..
+CUBE = $(BASE)/stm32cube
+DRIVERS = $(CUBE)/Drivers
 
+# Include dirs
+INCLUDE_DIRS = \
+-I. \
+-I$(DRIVERS)/BSP/STM32F4-Discovery \
+-I$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
+-I$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
+-I$(DRIVERS)/CMSIS/Include \
+
+# Source dirs
+SOURCES = $(BASE)/startup:.
+vpath %.c $(SOURCES)
+vpath %.S $(SOURCES)
+
+# Add common object files to per app list
+OBJS += startup_ARMCM4.o $(patsubst %.c,%.o,$(wildcard *.c))
+
+# MCU flags
 ARCH_FLAGS = -mthumb -mcpu=cortex-m4
+
+## STM32Cube flags
+CUBE_FLAGS = -DSTM32F407xx -DUSE_HAL_DRIVER
 
 # Use newlib-nano. To disable it, specify USE_NANO=
 USE_NANO = -specs=nano.specs
@@ -25,16 +48,11 @@ MAP=-Wl,-Map=$(EXE).map
 DEP_FLAGS = -MD -MP
 
 # CPPFLAGS are passed both to the compiler and the assembler (but not the linker)
-CPPFLAGS = -D__NO_SYSTEM_INIT $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
+COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
+CPPFLAGS = -D__NO_SYSTEM_INIT $(CUBE_FLAGS) $(INCLUDE_DIRS) $(COMMON_FLAGS)
 LDFLAGS= -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
 
-OBJS += startup_ARMCM4.o $(patsubst %.c,%.o,$(wildcard *.c))
-
-SOURCE_PATH = $(BASE)/startup:.
-
-vpath %.c $(SOURCE_PATH)
-vpath %.S $(SOURCE_PATH)
-
+# Dependencies and rules, using GNU make implicits as much as possible
 $(EXE): $(OBJS)
 
 .PHONY: clean
