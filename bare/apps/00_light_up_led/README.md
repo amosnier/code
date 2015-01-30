@@ -8,4 +8,4 @@ We use the board's datasheet to select and locate the LED. We select LD3, which
 is orange and "connected to the I/O PD13 of the STM32F407VGT6".
 We use the MCU's datasheet and reference manual to understand how we can control
 I/O PD13 by software. PD13 is bit 13 in GPIO port D.
-See comments in program.S.
+See comments in app.S.
