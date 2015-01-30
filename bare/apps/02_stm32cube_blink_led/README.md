@@ -38,6 +38,7 @@ rather to point to a standard cube extraction outside of the project directory
 Introducing the cube as a source code resource that is external to the project
 directory forces us to introduce a non-trivial Makefile structure. Therefore, the
 opportunity was taken to solve common Makefile issues:
+
 - Automatic generation of header dependencies.
 - General handling of code source in multiple directories.
 - Sharing of Makefile code between applications.
@@ -47,9 +48,11 @@ We also took the opportunity of this application to use standard C-runtime
 environment resources from our tool chain, as well as assembly startup file and
 linker script from the toolchain's examples. In that respect, relevant Makefile
 flags are:
+
 1. `-specs=nosys.specs`
 2. `-D__STARTUP_CLEAR_BSS`
 3. `-D__START=main`
+
 These seem to work together for an environment without standard input/output and
 imply that we do not invoke _mainCRTStartup provide by libgloss, but instead
 clear the BSS segment in our startup assembly file and then directly branch to
