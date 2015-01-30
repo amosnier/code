@@ -61,3 +61,17 @@ then `_mainCRTStartup` was invoked and that led to an exception. I am not sure
 why yet, but I guess that in order to use `rdimon.specs`, one needs to provide a
 proper semi-hosting environment, i.e. somehow specify standard in and out. This
 will be for a later application.
+
+###Binary size
+
+Since the BSP (`stm32f4_discovery.c` in practice) uses quite a lot of the MCU
+drivers, linking it requires the availability of quite many drivers, regardless
+of whether we use them right now or not. We used quite a radical approach,
+letting the Makefile include all drivers under `STM32F4xx_HAL_Driver/Src`. The
+consequence is that the disassembled text section reaches address `0x0800f274`
+(about 62 KB after the begining of the flash memory) to be compared with
+`0x080000f4` for the previous blinking application (244 bytes after the begining
+of the flash memory...) for an application that does exactly the same thing.
+However, the flash memory is 1 MB large, and we assume that we will sooner or
+later use quite a large number of driver functions. We therefore consider the
+increase as acceptable.
