@@ -1,6 +1,4 @@
-#code
-
-Alain Mosnier's public repository
+#code, Alain Mosnier's public repository
 
 Copyright (C) 2015  Alain Mosnier
 
