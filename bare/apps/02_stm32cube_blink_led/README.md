@@ -20,4 +20,4 @@ Given that we are using the STM32F4-Discovery board in this application, which
 is a standard ST board, we even have one more level of ready to use code in
 STM32CubeF4: the board support package (BSP) for the board. The BSP not only
 knows about all the GPIO pins on the MCU, it also knows how they are connected
-to LED1 to LED4, and can therefore provide functions like BSP_LED_Toggle(LED1).
+to LED1 to LED4, and can therefore provide functions like `BSP_LED_Toggle(LED1)`.
