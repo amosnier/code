@@ -54,7 +54,7 @@ flags are:
 3. `-D__START=main`
 
 These seem to work together for an environment without standard input/output and
-imply that we do not invoke `_mainCRTStartup` provide by libgloss, but instead
+imply that we do not invoke `_mainCRTStartup` provided by libgloss, but instead
 clear the BSS segment in our startup assembly file and then directly branch to
 our main function. I have experimented with `-specs=rdimon.specs` instead, but
 then `_mainCRTStartup` was invoked and that led to an exception. I am not sure
