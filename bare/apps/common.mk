@@ -11,6 +11,7 @@ DRIVERS = $(CUBE)/Drivers
 INCLUDE_DIRS = \
 -I. \
 -I$(BASE)/common/bsp \
+-I$(BASE)/common/hal \
 -I$(DRIVERS)/BSP/STM32F4-Discovery \
 -I$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
 -I$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
@@ -20,9 +21,9 @@ INCLUDE_DIRS = \
 SOURCES = \
 .:\
 $(BASE)/startup:\
+$(BASE)/common/hal:\
 $(DRIVERS)/BSP/STM32F4-Discovery:\
 $(DRIVERS)/STM32F4xx_HAL_Driver/Src:\
-$(BASE)/common/hal:\
 
 vpath %.c $(SOURCES)
 vpath %.S $(SOURCES)
@@ -32,6 +33,7 @@ OBJS += \
 $(patsubst %.c,%.o,$(wildcard *.c)) \
 startup_ARMCM4.o \
 stm32f4_discovery.o \
+$(patsubst %.c,%.o,$(notdir $(wildcard $(BASE)/common/hal/*.c))) \
 $(patsubst %.c,%.o,$(notdir $(wildcard $(DRIVERS)/STM32F4xx_HAL_Driver/Src/*.c))) \
 system_stm32f4xx.o \
 

@@ -1,0 +1,3 @@
+OBJS =  \
+
+include ../common.mk
