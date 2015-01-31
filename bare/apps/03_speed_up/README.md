@@ -11,7 +11,7 @@ currently have a scope at home, so I will satisfy myself with very rough
 estimates until further notice).
 
 Fortunately, the cube template for the STM32F4-Discovery board has a `main.c`
-that includes a SystemClock_Config() function that as far as I understand
+that includes a `SystemClock_Config()` function that as far as I understand
 maximizes speeds (MCU frequency and peripheral buses), which will do for now
 (there is a point in limiting frequencies from a power consumption perspective,
 but we will look into that later).
