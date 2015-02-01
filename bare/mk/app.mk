@@ -3,12 +3,14 @@ include ../../mk/env.mk
 
 EXE = app
 
+LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
+
 # Include dirs
 INCLUDE_DIRS = \
 -I. \
 -I$(BASE)/common/bsp \
 -I$(BASE)/common/init \
--I$(BASE)/lib/lib$(LIB_HAL) \
+-I$(LIB_HAL_DIR) \
 -I$(DRIVERS)/BSP/STM32F4-Discovery \
 -I$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
 -I$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
@@ -48,11 +50,20 @@ MAP=-Wl,-Map=$(EXE).map
 COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INCLUDE_DIRS) $(COMMON_FLAGS)
 CFLAGS = -std=c11
-LDLIBS = -L$(BASE)/lib/lib$(LIB_HAL) -l$(LIB_HAL)
+LDLIBS = -L$(LIB_HAL_DIR) -l$(LIB_HAL)
 LDFLAGS = $(LDLIBS) -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
+
+# Dependency on phony hal ensures that we try to rebuild libhalxxx every time,
+# letting its own makefile decide whether it actually needs to be rebuilt or not.
+.PHONY: all
+all: hal $(EXE)
 
 # Dependencies and rules, using GNU make implicits as much as possible
 $(EXE): $(OBJS)
+
+.PHONY: hal
+hal:
+	make -C $(LIB_HAL_DIR)
 
 .PHONY: clean
 clean:
