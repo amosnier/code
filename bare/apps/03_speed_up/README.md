@@ -3,7 +3,7 @@
 ##Background
 
 So far we have not touched the MCU frequency after reset. According to the
-datasheet and reference manual the STM32F497VG can run at a frequency of up to
+datasheet and reference manual the STM32F407VG can run at a frequency of up to
 168 Mhz, but its clocking source at reset is the HSI oscillator that gives it a
 frequency of 16 MHz. This is the theory. The LED blinking frequency in our
 previous blinking projects tends to very roughly confirm that (I do not
