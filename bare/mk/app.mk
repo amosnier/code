@@ -8,7 +8,7 @@ INCLUDE_DIRS = \
 -I. \
 -I$(BASE)/common/bsp \
 -I$(BASE)/common/init \
--I$(BASE)/lib/$(LIB_HAL) \
+-I$(BASE)/lib/lib$(LIB_HAL) \
 -I$(DRIVERS)/BSP/STM32F4-Discovery \
 -I$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
 -I$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
@@ -31,8 +31,6 @@ $(patsubst %.c,%.o,$(wildcard *.c)) \
 startup_ARMCM4.o \
 stm32f4_discovery.o \
 $(patsubst %.c,%.o,$(notdir $(wildcard $(BASE)/common/init/*.c))) \
-$(patsubst %.c,%.o,$(patsubst %template.c,,$(notdir $(wildcard $(DRIVERS)/STM32F4xx_HAL_Driver/Src/*.c)))) \
-system_stm32f4xx.o \
 
 # Use semihosting or not
 USE_SEMIHOST = -specs=rdimon.specs
@@ -50,7 +48,8 @@ MAP=-Wl,-Map=$(EXE).map
 COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INCLUDE_DIRS) $(COMMON_FLAGS)
 CFLAGS = -std=c11
-LDFLAGS= -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
+LDLIBS = -L$(BASE)/lib/lib$(LIB_HAL) -l$(LIB_HAL)
+LDFLAGS = $(LDLIBS) -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
 
 # Dependencies and rules, using GNU make implicits as much as possible
 $(EXE): $(OBJS)
