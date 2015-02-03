@@ -4,6 +4,7 @@ include ../../mk/env.mk
 EXE = app
 
 LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
+TAGS = $(BASE)/tags
 
 # Include dirs
 INCLUDE_DIRS = \
@@ -55,8 +56,9 @@ LDFLAGS = $(LDLIBS) -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) 
 
 # Dependency on phony hal ensures that we try to rebuild libhalxxx every time,
 # letting its own makefile decide whether it actually needs to be rebuilt or not.
+# Same principle for tags.
 .PHONY: all
-all: hal $(EXE)
+all: hal tags $(EXE)
 
 # Dependencies and rules, using GNU make implicits as much as possible
 $(EXE): $(OBJS)
@@ -64,6 +66,10 @@ $(EXE): $(OBJS)
 .PHONY: hal
 hal:
 	make -C $(LIB_HAL_DIR)
+
+.PHONY: tags
+tags:
+	make -C $(TAGS)
 
 .PHONY: clean
 clean:
