@@ -6,27 +6,29 @@ EXE = app
 LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
 TAGS = $(BASE)/tags
 
+INC_DIRS = \
+. \
+$(BASE)/common/bsp \
+$(BASE)/common/init \
+$(LIB_HAL_DIR) \
+$(DRIVERS)/BSP/STM32F4-Discovery \
+$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
+$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
+$(DRIVERS)/CMSIS/Include \
+
 # Include dirs
-INCLUDE_DIRS = \
--I. \
--I$(BASE)/common/bsp \
--I$(BASE)/common/init \
--I$(LIB_HAL_DIR) \
--I$(DRIVERS)/BSP/STM32F4-Discovery \
--I$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
--I$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
--I$(DRIVERS)/CMSIS/Include \
+INC = $(addprefix -I, $(INC_DIRS))
 
 # Source dirs
-SOURCES = \
-.:\
-$(BASE)/startup:\
-$(BASE)/common/init:\
-$(DRIVERS)/BSP/STM32F4-Discovery:\
-$(DRIVERS)/STM32F4xx_HAL_Driver/Src:\
+SRC = \
+. \
+$(BASE)/startup \
+$(BASE)/common/init \
+$(DRIVERS)/BSP/STM32F4-Discovery \
+$(DRIVERS)/BSP/STM32F4-Discovery \
 
-vpath %.c $(SOURCES)
-vpath %.S $(SOURCES)
+vpath %.c $(SRC)
+vpath %.S $(SRC)
 
 # Object files
 OBJS = \
@@ -49,7 +51,7 @@ MAP=-Wl,-Map=$(EXE).map
 
 # CPPFLAGS are passed both to the compiler and the assembler (but not the linker)
 COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
-CPPFLAGS = $(HAL_FLAGS) $(INCLUDE_DIRS) $(COMMON_FLAGS)
+CPPFLAGS = $(HAL_FLAGS) $(INC) $(COMMON_FLAGS)
 CFLAGS = -std=c11
 LDLIBS = -L$(LIB_HAL_DIR) -l$(LIB_HAL)
 LDFLAGS = $(LDLIBS) -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
