@@ -18,9 +18,14 @@ INC = $(addprefix -I, $(INC_DIRS))
 # SRC, also required by tags.mk!
 SRC = \
 $(DRIVERS)/BSP/STM32F4-Discovery \
+$(DRIVERS)/STM32F4xx_HAL_Driver/Src \
 
 vpath %.c $(SRC)
 
-OBJS = $(patsubst %.c,%.o,$(notdir $(wildcard $(DRIVERS)/BSP/STM32F4-Discovery/*.c)))
+SRC_FILES = \
+$(patsubst %template.c,,$(notdir $(wildcard $(DRIVERS)/STM32F4xx_HAL_Driver/Src/*.c))) \
+$(notdir $(wildcard $(DRIVERS)/BSP/STM32F4-Discovery/*.c)) \
+
+OBJS = $(patsubst %.c,%.o,$(SRC_FILES))
 
 include ../../mk/lib.mk

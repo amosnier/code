@@ -4,6 +4,7 @@ include ../../mk/env.mk
 EXE = app
 
 LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
+
 TAGS = $(BASE)/tags
 
 INC_DIRS = \
@@ -24,8 +25,6 @@ SRC = \
 . \
 $(BASE)/startup \
 $(BASE)/common/init \
-$(DRIVERS)/BSP/STM32F4-Discovery \
-$(DRIVERS)/BSP/STM32F4-Discovery \
 
 vpath %.c $(SRC)
 vpath %.S $(SRC)
@@ -34,7 +33,6 @@ vpath %.S $(SRC)
 OBJS = \
 $(patsubst %.c,%.o,$(wildcard *.c)) \
 startup_ARMCM4.o \
-stm32f4_discovery.o \
 $(patsubst %.c,%.o,$(notdir $(wildcard $(BASE)/common/init/*.c))) \
 
 # Use semihosting or not
@@ -54,28 +52,27 @@ COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INC) $(COMMON_FLAGS)
 CFLAGS = -std=c11
 LDLIBS = -L$(LIB_HAL_DIR) -l$(LIB_HAL)
-LDFLAGS = $(LDLIBS) -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
+LDFLAGS = -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
 
-# Dependency on phony hal ensures that we try to rebuild libhalxxx every time,
-# letting its own makefile decide whether it actually needs to be rebuilt or not.
-# Same principle for tags.
+# Dependency on phony prerequesites ensures that we try to rebuild them every
+# time, letting the respective Makefiles decide whether they actually need to be
+# rebuilt or not.
 .PHONY: all
-all: hal tags $(EXE)
+all: $(LIB_HAL) $(EXE) TAGS
 
 # Dependencies and rules, using GNU make implicits as much as possible
 $(EXE): $(OBJS)
 
-.PHONY: hal
-hal:
+.PHONY: $(LIB_HAL)
+$(LIB_HAL):
 	make -C $(LIB_HAL_DIR)
 
-.PHONY: tags
-tags:
-	make -C $(TAGS)
+TAGS: $(shell find $(INC_DIRS) -name "*.[h]") $(shell find $(SRC) -name "*.[Sc]")
+	etags $^ -i $(LIB_HAL_DIR)/TAGS
 
 .PHONY: clean
 clean:
-	rm -f $(EXE) *.o *.d *.map *~
+	rm -f $(EXE) *.o *.d *.map *~ TAGS
 
 .PHONY: show
 show:

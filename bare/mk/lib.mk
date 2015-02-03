@@ -11,7 +11,7 @@ all: $(LIB) TAGS
 $(LIB): $(AR_OBJS)
 	$(RANLIB) $@
 
-include ../../mk/tags.mk
+include ../../mk/libtags.mk
 
 .PHONY: clean
 clean:

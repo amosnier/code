@@ -1,5 +1,4 @@
 MCU = STM32F407xx
-LIB_HAL = hal407
-LIB_BSP = stm32f4disco
+LIB_HAL = stm32f4disc
 
 include ../../mk/app.mk
