@@ -19,13 +19,13 @@ $(DRIVERS)/CMSIS/Include \
 INC = $(addprefix -I, $(INC_DIRS))
 
 # Source dirs
-SRC = \
+SRC_DIRS = \
 . \
 $(BASE)/startup \
 $(BASE)/common/init \
 
-vpath %.c $(SRC)
-vpath %.S $(SRC)
+vpath %.c $(SRC_DIRS)
+vpath %.S $(SRC_DIRS)
 
 # Object files
 OBJS = \
@@ -65,7 +65,7 @@ $(EXE): $(OBJS)
 $(LIB_HAL):
 	make -C $(LIB_HAL_DIR)
 
-TAGS: $(shell find $(INC_DIRS) -name "*.[h]") $(shell find $(SRC) -name "*.[Sc]")
+TAGS: $(shell find $(INC_DIRS) -name "*.[h]") $(shell find $(SRC_DIRS) -name "*.[Sc]")
 	etags $^ -i $(LIB_HAL_DIR)/TAGS
 
 .PHONY: clean
