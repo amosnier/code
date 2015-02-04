@@ -11,7 +11,8 @@ all: $(LIB) TAGS
 $(LIB): $(AR_OBJS)
 	$(RANLIB) $@
 
-include ../../mk/libtags.mk
+TAGS: $(shell find $(INC_DIRS) -name "*.[h]") $(shell find $(SRC) -name "*.[Sc]")
+	etags $^
 
 .PHONY: clean
 clean:
