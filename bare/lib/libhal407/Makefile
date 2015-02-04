@@ -1,4 +1,1 @@
-MCU = STM32F407xx
-LIB = libhal407.a
-
-include ../../mk/libhal.mk
+../../mk/lib.mk

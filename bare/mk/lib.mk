@@ -1,4 +1,6 @@
-AR_OBJS = $(patsubst %.o,$(LIB)(%.o),$(OBJS))
+include ../../mk/common.mk
+include specs.mk
+include ../../mk/calcfiles.mk
 
 # CPPFLAGS are passed both to the compiler and the assembler (but not the linker)
 COMMON_FLAGS = $(DEP_FLAGS) $(ARCH_FLAGS) -g -Wall
@@ -11,7 +13,7 @@ all: $(LIB) TAGS
 $(LIB): $(AR_OBJS)
 	$(RANLIB) $@
 
-TAGS: $(shell find $(INC_DIRS) -name "*.[h]") $(shell find $(SRC) -name "*.[Sc]")
+TAGS: $(INC_FILES) $(SRC_FILES)
 	etags $^
 
 .PHONY: clean
