@@ -9,3 +9,4 @@ app
 /bare/dox/*/html
 TAGS
 *.tags
+/bare/test/

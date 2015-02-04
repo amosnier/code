@@ -5,8 +5,6 @@ EXE = app
 
 LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
 
-TAGS = $(BASE)/tags
-
 INC_DIRS = \
 . \
 $(BASE)/common/bsp \
