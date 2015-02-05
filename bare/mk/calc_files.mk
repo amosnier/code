@@ -13,6 +13,3 @@ OBJS = $(call src2obj, $(SRC_FILES))
 
 # AR_OBJS is used instead of OBJS if we are building a library
 AR_OBJS = $(patsubst %.o,$(LIB)(%.o),$(OBJS))
-
-vpath %.c $(SRC_DIRS)
-vpath %.S $(SRC_DIRS)
