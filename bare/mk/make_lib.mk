@@ -1,6 +1,6 @@
-include ../../mk/common.mk
 include specs.mk
-include ../../mk/calcfiles.mk
+include ../../mk/common.mk
+include ../../mk/calc_files.mk
 
 # CPPFLAGS are passed both to the compiler and the assembler (but not the linker)
 COMMON_FLAGS = $(DEP_FLAGS) $(ARCH_FLAGS) -g -Wall

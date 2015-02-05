@@ -1,1 +1,1 @@
-../../mk/lib.mk
+../../mk/make_lib.mk
