@@ -11,10 +11,10 @@ INC_DIRS = \
 $(BASE)/common/bsp \
 $(BASE)/common/init \
 $(LIB_HAL_DIR) \
-$(DRIVERS)/BSP/STM32F4-Discovery \
-$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
-$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
-$(DRIVERS)/CMSIS/Include \
+$(CUBE)/STM32F4-Discovery \
+$(CUBE)/STM32F4xx_HAL_Driver_Inc \
+$(CUBE)/CMSIS_STM32F4xx_Inc \
+$(CUBE)/CMSIS_Inc \
 
 SRC_DIRS = \
 . \
@@ -44,7 +44,7 @@ LDLIBS = -L$(LIB_HAL_DIR) -l$(LIB_HAL)
 LDFLAGS = -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
 
 .PHONY: all
-all: $(EXE) TAGS
+all: $(EXE)
 
 # Note: implicit rule won't work here because of the lib dependency
 $(EXE): $(OBJS) $(LIB_HAL)
@@ -54,12 +54,9 @@ $(EXE): $(OBJS) $(LIB_HAL)
 $(LIB_HAL):
 	make -C $(LIB_HAL_DIR)
 
-TAGS: $(INC_FILES) $(SRC_FILES)
-	etags $^ -i $(LIB_HAL_DIR)/TAGS
-
 .PHONY: clean
 clean:
-	rm -f $(EXE) *.o *.d *.map *~ TAGS
+	rm -f $(EXE) *.o *.d *.map *~
 
 .PHONY: show
 show:

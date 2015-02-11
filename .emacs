@@ -36,6 +36,12 @@
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
 
+;; Enable ggtags
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+	      (ggtags-mode 1))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
 ;; This hack fixes indentation for C++11's "enum class" in Emacs.

@@ -4,7 +4,7 @@ RANLIB = arm-none-eabi-ranlib
 
 # Directories
 BASE = ../..
-CUBE = $(BASE)/stm32cube
+CUBE = $(BASE)/stm32cubef4
 DRIVERS = $(CUBE)/Drivers
 
 # MCU flags

@@ -10,3 +10,7 @@ app
 TAGS
 *.tags
 /bare/test/
+/bare/GPATH
+/bare/GRTAGS
+/bare/GTAGS
+/bare/ID

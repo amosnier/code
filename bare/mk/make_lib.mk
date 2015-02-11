@@ -8,17 +8,14 @@ COMMON_FLAGS = $(DEP_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INC) $(COMMON_FLAGS)
 
 .PHONY: all
-all: $(LIB) TAGS
+all: $(LIB)
 
 $(LIB): $(AR_OBJS)
 	$(RANLIB) $@
 
-TAGS: $(INC_FILES) $(SRC_FILES)
-	etags $^
-
 .PHONY: clean
 clean:
-	rm -f $(LIB) *.o *.d *~ TAGS
+	rm -f $(LIB) *.o *.d *~
 
 .PHONY: show
 show:

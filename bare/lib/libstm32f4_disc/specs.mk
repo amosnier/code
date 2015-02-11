@@ -2,12 +2,12 @@ MCU = STM32F407xx
 LIB = libstm32f4_disc.a
 
 INC_DIRS = \
-$(DRIVERS)/BSP/STM32F4-Discovery \
-$(DRIVERS)/STM32F4xx_HAL_Driver/Inc \
+$(CUBE)/STM32F4-Discovery \
+$(CUBE)/STM32F4xx_HAL_Driver_Inc \
 $(BASE)/lib/libhal407 \
-$(DRIVERS)/CMSIS/Device/ST/STM32F4xx/Include \
-$(DRIVERS)/CMSIS/Include \
+$(CUBE)/CMSIS_STM32F4xx_Inc \
+$(CUBE)/CMSIS_Inc \
 
 SRC_DIRS = \
-$(DRIVERS)/BSP/STM32F4-Discovery \
-$(DRIVERS)/STM32F4xx_HAL_Driver/Src \
+$(CUBE)/STM32F4-Discovery \
+$(CUBE)/STM32F4xx_HAL_Driver_Src \
