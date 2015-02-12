@@ -25,13 +25,14 @@
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
 ;; Keyboard shorcuts
-(define-key global-map [f4] 'goto-line)
-(define-key global-map [f5] 'compile)
-(define-key global-map [f6] 'recompile)
-(define-key global-map [f7] 'next-error)
-(define-key global-map [f8] 'magit-status)
-(define-key global-map [f9] 'gdb)
-(define-key global-map [f10] 'gdb-many-windows)
+(global-set-key (kbd "C-i") 'imenu)
+(global-set-key [f4] 'goto-line)
+(global-set-key [f5] 'compile)
+(global-set-key [f6] 'recompile)
+(global-set-key [f7] 'next-error)
+(global-set-key [f8] 'magit-status)
+(global-set-key [f9] 'gdb)
+(global-set-key [f10] 'gdb-many-windows)
 
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
