@@ -37,8 +37,11 @@
 ;; Enable ggtags
 (add-hook 'c-mode-common-hook
 	  (lambda ()
-	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+	    (when (derived-mode-p 'asm-mode 'c-mode 'c++-mode)
 	      (ggtags-mode 1))))
+
+;; Enable company-mode
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
