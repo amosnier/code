@@ -37,3 +37,7 @@ provide an interrupt handler. That is solved in the template in a file named
 That, the corresponding header files, an `#include clock_init.h` in my `main.c`,
 and I just have to invoke `clock_init()` in `main()` to multiply blinking
 frequency by 10 or so :-).
+
+Note: a while after writing the text above, I cleaned the implementation and went
+from a manual version of busy waiting to a version based on HAL_Delay(), a
+function provided by STM32CubeF4.
