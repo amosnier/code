@@ -8,3 +8,6 @@ src_dir2file = $(patsubst %template.c, , $(wildcard $(addsuffix /*.[cS], $(1))))
 
 # Source files to object files, including path removal
 src2obj = $(patsubst %.S, %.o, $(patsubst %.c, %.o, $(notdir $(1))))
+
+# Object files to dependency files
+obj2dep = $(patsubst %.o, %.d, $(1))

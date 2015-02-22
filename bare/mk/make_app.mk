@@ -54,6 +54,8 @@ $(EXE): $(OBJS) $(LIB_HAL)
 $(LIB_HAL):
 	make -C $(LIB_HAL_DIR)
 
+-include $(DEPS)
+
 .PHONY: clean
 clean:
 	rm -f $(EXE) *.o *.d *.map *~
