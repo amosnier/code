@@ -2,48 +2,58 @@
 #include "stm32f4xx_hal.h"
 #include "fifo.h"
 
+static inline volatile struct link * load_exclusive(volatile struct link * const *location)
+{
+	return (volatile struct link *)__LDREXW((volatile uint32_t *)location);
+}
+
+static inline bool store_exclusive(volatile struct link *link, volatile struct link **location)
+{
+	return (bool)!__STREXW((uint32_t)link, (volatile uint32_t *)location);
+}
+
 void fifo_init(struct fifo *fifo, size_t item_size, unsigned size, void *memory)
 {
 	fifo->write = memory;
 	fifo->read = NULL;
-	volatile struct header * h = memory;
+	volatile struct link * l = memory;
   
 	// Create the linked list of empty cells
 	for (unsigned i = 0; i < size; i++) {
-		h->next = (i == size - 1) ? NULL : (volatile struct header *)((char *)(h + 1) + item_size);
-		h = h->next;
+		l->next = (i == size - 1) ? NULL : (volatile struct link *)((char *)(l + 1) + item_size);
+		l = l->next;
 	}
 }
 
 bool fifo_write(struct fifo *fifo, const void *item)
 {
-	volatile struct header *h;
+	volatile struct link *l;
   
 	// Unlink the head cell from the write list
 	do {
-		h = (volatile struct header *)__LDREXW((volatile uint32_t *)&fifo->write);
-		if (h == NULL) { // FIFO full?
+		l = load_exclusive(&fifo->write);
+		if (l == NULL) { // FIFO full?
 			return false;
 		}
-		// while condition always true in non preemptable context with single core
-	} while (!__STREXW((uint32_t)h->next, (volatile uint32_t *)&fifo->write));
+		// while condition always true in non preemptable context with single core.
+	} while (store_exclusive(l->next, &fifo->write));
 
 	// Data memory barrier necessary to ensure correct order of memory accesses.
 	__DMB();
   
-	// The cell pointed to by h is now only accessible by us, we can perform the
+	// The cell pointed to by l is now only accessible by us, we can perform the
 	// actual writing.
-	memcpy((void *)(h + 1), item, fifo->item_size);
+	memcpy((void *)(l + 1), item, fifo->item_size);
 
 	// Data memory barrier necessary to ensure correct order of memory accesses.
 	__DMB();
   
 	// Insert the item as the head of the read list, to make it available to
-	// readers
+	// readers.
 	do {
-		h->next = (volatile struct header *)__LDREXW((volatile uint32_t *)&fifo->read);
-		// while condition always true in non preemptable context with single core
-	} while (!__STREXW((uint32_t)h, (volatile uint32_t *)&fifo->read));
+		l->next = load_exclusive(&fifo->read);
+		// while condition always true in non preemptable context with single core.
+	} while (store_exclusive(l, &fifo->read));
 
 	return true;
 }
@@ -55,15 +65,18 @@ bool fifo_read(struct fifo *fifo, void *item)
   
 	while (true) {
 		// Walk through the list to the tail cell, which was inserted
-		// first, and remember its address of the previous cell, in
-		// order to unlink the tail from it.
-		volatile struct header * volatile *prev = &fifo->read;
-		volatile struct header *h = *prev;
-		while (h->next != NULL) {
-			prev = &h->next;
-			h = h->next;
+		// first, and remember the link pointing to it, in order to
+		// unlink it.
+		volatile struct link * volatile *prev = &fifo->read;
+		volatile struct link *l = fifo->read;
+		while (l->next != NULL) {
+			prev = &l->next;
+			l = l->next;
 		}
 
+		(void)prev;
+		// to be continued...
+
 	}
-	return false; // Will not be reached
+	return false; // Never reached!
 }
