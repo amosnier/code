@@ -1,0 +1,1 @@
+../mk/make_all_dirs.mk
