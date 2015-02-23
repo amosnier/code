@@ -1,1 +1,0 @@
-../../mk/make_app.mk
