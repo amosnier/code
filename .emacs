@@ -25,12 +25,14 @@
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
 ;; Keyboard shorcuts
+(global-set-key [f2] 'company-complete)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'recompile)
-(global-set-key [f9] 'kill-this-buffer)
+(global-set-key [f9] 'next-error)
 (global-set-key [f10] 'magit-status)
+(global-set-key [f12] 'kill-this-buffer)
 
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
@@ -43,9 +45,6 @@
 (add-hook 'asm-mode-hook
 	  (lambda ()
 	      (ggtags-mode 1)))
-
-;; Enable company-mode
-(add-hook 'after-init-hook 'global-company-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN

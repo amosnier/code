@@ -6,6 +6,7 @@
 bare/datasheets/*.pdf
 /bare/orig/orig.S
 app
+main
 /bare/dox/*/html
 TAGS
 *.tags

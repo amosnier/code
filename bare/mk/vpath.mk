@@ -1,2 +1,2 @@
-vpath %.c $(SRC_DIRS)
-vpath %.S $(SRC_DIRS)
+vpath %.c $(SRC_DIRS) $(SRC_ADD_DIRS)
+vpath %.S $(SRC_DIRS) $(SRC_ADD_DIRS)
