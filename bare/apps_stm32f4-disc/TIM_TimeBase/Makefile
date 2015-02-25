@@ -18,7 +18,6 @@ $(CUBE)/CMSIS_Inc \
 SRC_DIRS = \
 ./Src \
 $(BASE)/startup \
-$(BASE)/common/init \
 
 # Directories in which source files are cherry-picked
 SRC_ADD_DIRS = \
@@ -32,7 +31,7 @@ include $(BASE)/mk/vpath.mk
 SRC_FILES += \
 stm32f4xx_hal.c \
 stm32f4_discovery.c \
-stm32f4xx_hal_tim.c\
+stm32f4xx_hal_tim.c \
 stm32f4xx_hal_rcc.c \
 stm32f4xx_hal_cortex.c \
 stm32f4xx_hal_gpio.c \
