@@ -3,7 +3,6 @@ AR = arm-none-eabi-ar
 RANLIB = arm-none-eabi-ranlib
 
 # Directories
-BASE = ../..
 CUBE = $(BASE)/stm32cubef4
 DRIVERS = $(CUBE)/Drivers
 

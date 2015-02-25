@@ -1,4 +1,4 @@
-include ../../mk/functions.mk
+include $(BASE)/mk/functions.mk
 
 # Generate include path flags
 INC = $(addprefix -I, $(INC_DIRS))

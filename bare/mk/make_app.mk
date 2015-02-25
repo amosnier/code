@@ -1,12 +1,12 @@
 include target.mk
-include ../../mk/common.mk
-include ../../mk/calc_files.mk
+include $(BASE)/mk/common.mk
+include $(BASE)/mk/calc_files.mk
 
 EXE = app
 
 LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
 
-INC_DIRS = \
+INC_DIRS += \
 . \
 $(BASE)/common/bsp \
 $(BASE)/common/init \
@@ -16,7 +16,7 @@ $(CUBE)/STM32F4xx_HAL_Driver_Inc \
 $(CUBE)/CMSIS_STM32F4xx_Inc \
 $(CUBE)/CMSIS_Inc \
 
-SRC_DIRS = \
+SRC_DIRS += \
 . \
 $(BASE)/startup \
 $(BASE)/common/init \

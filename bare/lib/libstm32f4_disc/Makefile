@@ -1,1 +1,2 @@
-../../mk/make_lib.mk
+BASE = ../..
+include $(BASE)/mk/make_lib.mk

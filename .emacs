@@ -29,6 +29,7 @@
 (global-set-key [f6] 'gdb-many-windows)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'recompile)
+(global-set-key [f9] 'kill-this-buffer)
 (global-set-key [f10] 'magit-status)
 
 ;; GDB command
