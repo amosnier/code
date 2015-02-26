@@ -25,7 +25,7 @@
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
 ;; Keyboard shorcuts
-(global-set-key [f2] 'company-complete)
+(global-set-key [f2] 'company-mode)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
 (global-set-key [f7] 'compile)

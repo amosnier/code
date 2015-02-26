@@ -10,7 +10,6 @@ INC_DIRS += \
 . \
 $(BASE)/common/bsp \
 $(BASE)/common/init \
-$(LIB_HAL_DIR) \
 $(CUBE)/STM32F4-Discovery \
 $(CUBE)/STM32F4xx_HAL_Driver_Inc \
 $(CUBE)/CMSIS_STM32F4xx_Inc \
@@ -20,9 +19,18 @@ SRC_DIRS += \
 . \
 $(BASE)/startup \
 $(BASE)/common/init \
+$(CUBE)/STM32F4xx_HAL_Driver_Src \
+
+# Directories in which source files are cherry-picked
+SRC_ADD_DIRS = \
+$(CUBE)/STM32F4-Discovery \
 
 # Immediate evaluation, must be done here, not earlier!
 include $(BASE)/mk/vpath.mk
+
+# Cherry-picked source files
+SRC_FILES += \
+stm32f4_discovery.c \
 
 # Use semihosting or not
 USE_SEMIHOST = -specs=rdimon.specs
@@ -40,19 +48,12 @@ MAP=-Wl,-Map=$(EXE).map
 COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INC) $(COMMON_FLAGS)
 CFLAGS = -std=c11
-LDLIBS = -L$(LIB_HAL_DIR) -l$(LIB_HAL)
 LDFLAGS = -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
 
 .PHONY: all
 all: $(EXE)
 
-# Note: implicit rule won't work here because of the lib dependency
-$(EXE): $(OBJS) $(LIB_HAL)
-	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $@
-
-.PHONY: $(LIB_HAL)
-$(LIB_HAL):
-	make -C $(LIB_HAL_DIR)
+$(EXE): $(OBJS)
 
 -include $(DEPS)
 
