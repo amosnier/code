@@ -18,27 +18,18 @@ $(CUBE)/CMSIS_Inc \
 SRC_DIRS = \
 ./Src \
 $(BASE)/startup \
+$(CUBE)/STM32F4xx_HAL_Driver_Src \
 
 # Directories in which source files are cherry-picked
 SRC_ADD_DIRS = \
 $(CUBE)/STM32F4-Discovery \
-$(CUBE)/STM32F4xx_HAL_Driver_Src \
 
 # Immediate evaluation, must be done here, not earlier!
 include $(BASE)/mk/vpath.mk
 
 # Cherry-picked source files
 SRC_FILES += \
-stm32f4xx_hal.c \
 stm32f4_discovery.c \
-stm32f4xx_hal_tim.c \
-stm32f4xx_hal_rcc.c \
-stm32f4xx_hal_cortex.c \
-stm32f4xx_hal_gpio.c \
-stm32f4xx_hal_spi.c \
-stm32f4xx_hal_i2c.c \
-stm32f4xx_hal_dma.c \
-stm32f4xx_hal_tim_ex.c \
 
 # Use semihosting or not
 USE_SEMIHOST = -specs=rdimon.specs
