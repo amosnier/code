@@ -1,36 +1,28 @@
-include target.mk
-include $(BASE)/mk/common.mk
-include $(BASE)/mk/calc_files.mk
+# Generic application Makefile for Cortex-M4. The actual Makefile should be a
+# symlink to this, and application specifics should be defined in specs.mk to be
+# located in the same directory as the Makefile.
 
-EXE = app
+include specs.mk
 
-LIB_HAL_DIR = $(BASE)/lib/lib$(LIB_HAL)
-
-INC_DIRS += \
-. \
-$(BASE)/common/bsp \
-$(BASE)/common/init \
-$(CUBE)/STM32F4-Discovery \
-$(CUBE)/STM32F4xx_HAL_Driver_Inc \
-$(CUBE)/CMSIS_STM32F4xx_Inc \
-$(CUBE)/CMSIS_Inc \
-
-SRC_DIRS += \
-. \
-$(BASE)/startup \
-$(BASE)/common/init \
-$(CUBE)/STM32F4xx_HAL_Driver_Src \
-
-# Directories in which source files are cherry-picked
-SRC_ADD_DIRS = \
-$(CUBE)/STM32F4-Discovery \
-
-# Immediate evaluation, must be done here, not earlier!
+# Evaluated immediately, do not execute earlier!
 include $(BASE)/mk/vpath.mk
 
-# Cherry-picked source files
-SRC_FILES += \
-stm32f4_discovery.c \
+include $(BASE)/mk/calc_files.mk
+
+CC = arm-none-eabi-gcc
+AR = arm-none-eabi-ar
+
+# MCU flags
+ARCH_FLAGS = -mthumb -mcpu=cortex-m4
+
+## STM32Cube HAL flags
+HAL_FLAGS = -DUSE_HAL_DRIVER -D$(MCU)
+
+# Use newlib-nano. To disable it, specify USE_NANO=
+USE_NANO = -specs=nano.specs
+
+# Create include dependency files
+DEP_FLAGS = -MD -MP
 
 # Use semihosting or not
 USE_SEMIHOST = -specs=rdimon.specs
@@ -49,6 +41,9 @@ COMMON_FLAGS = $(DEP_FLAGS) $(SPEC_FLAGS) $(ARCH_FLAGS) -g -Wall
 CPPFLAGS = $(HAL_FLAGS) $(INC) $(COMMON_FLAGS)
 CFLAGS = -std=c11
 LDFLAGS = -L$(BASE)/ldscripts -T script.ld $(GC) $(MAP) $(SPEC_FLAGS) -g
+
+
+# Actual build rules: clean and simple (using GNU Make implicit rules)
 
 .PHONY: all
 all: $(EXE)
