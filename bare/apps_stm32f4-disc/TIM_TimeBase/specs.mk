@@ -15,7 +15,7 @@ $(CUBE)/CMSIS_Inc \
 # Directories in which all source files are picked
 SRC_DIRS = \
 ./Src \
-$(BASE)/startup \
+$(BASE)/common/stm32f407xx_startup \
 $(CUBE)/STM32F4xx_HAL_Driver_Src \
 
 # Directories in which source files are cherry-picked

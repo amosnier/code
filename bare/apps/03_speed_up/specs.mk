@@ -17,7 +17,7 @@ $(CUBE)/CMSIS_Inc \
 # Directories in which all source files are compiled and linked
 SRC_DIRS = \
 . \
-$(BASE)/startup \
+$(BASE)/common/stm32f407xx_startup \
 $(BASE)/common/stm32f4-disc_simple_init \
 $(CUBE)/STM32F4xx_HAL_Driver_Src \
 

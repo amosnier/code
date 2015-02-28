@@ -10,7 +10,6 @@ include $(BASE)/mk/vpath.mk
 include $(BASE)/mk/calc_files.mk
 
 CC = arm-none-eabi-gcc
-AR = arm-none-eabi-ar
 
 # MCU flags
 ARCH_FLAGS = -mthumb -mcpu=cortex-m4
