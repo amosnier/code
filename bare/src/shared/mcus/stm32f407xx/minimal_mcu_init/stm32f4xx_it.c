@@ -38,7 +38,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "hw_init.h"
+#include "mcu_init.h"
 #include "stm32f4xx_it.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples

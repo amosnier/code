@@ -1,9 +1,9 @@
 #include "led.h"
-#include "hw_init.h"
+#include "mcu_init.h"
 
 int main(void)
 {
-	hw_init();
+	mcu_init();
 	BSP_LED_Init(LED_ORANGE);
 	for (;;) {
 		BSP_LED_Toggle(LED_ORANGE);

@@ -36,7 +36,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "hw_init.h"
+#include "mcu_init.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -56,11 +56,11 @@ static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Clock init
+  * @brief  MCU init
   * @param  None
   * @retval None
   */
-void hw_init(void)
+void mcu_init(void)
 {
 
   /* STM32F4xx HAL library initialization:
