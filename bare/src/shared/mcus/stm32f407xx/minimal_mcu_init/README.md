@@ -5,5 +5,5 @@ general for the MCU. However main.h/.c were renamed to mcu_init.h/.c, since it
 felt like a cleaner structure.
 
 This whole directory will be compiled and linked to the application, that will
-typically invoke mcu_init() as its first invokation in main(). This directory
-will also belong to the include directories for the application.
+typically invoke `mcu_init()` as its first invokation in `main()`. This
+directory will also belong to the include directories for the application.
