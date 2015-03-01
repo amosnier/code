@@ -2,6 +2,14 @@
 # symlink to this, and application specifics should be defined in specs.mk to be
 # located in the same directory as the Makefile.
 
+# Paths from base for convenience. Can be used in specs.mk. But specs.mk must
+# define BASE, since the file supports building from arbitrary relative
+# positions in the file tree.
+SHARED = $(BASE)/src/shared
+CUBE = $(SHARED)/stm32cubef4
+BOARDS = $(SHARED)/boards
+MCUS = $(SHARED)/mcus
+
 include specs.mk
 
 # Evaluated immediately, do not execute earlier!
