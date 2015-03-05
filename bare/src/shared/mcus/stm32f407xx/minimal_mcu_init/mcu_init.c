@@ -98,6 +98,16 @@ void mcu_init(void)
   * @param  None
   * @retval None
   */
+/*
+ * Note by Alain.
+ * The numbers above will lead to:
+ * - HSE frequency     = 8 MHz
+ * - VCO frequency     = 336 MHz (PLL internal)
+ * - PLL out frequency = 168 MHz
+ * - AHB frequency     = 168 MHz
+ * - APB1 frequency    = 42 Mhz
+ * - APB2 frequency    = 84 MHz
+ */
 static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
