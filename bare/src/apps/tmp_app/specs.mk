@@ -6,8 +6,8 @@ BASE = ../../..
 
 INC_DIRS = \
 . \
+mcu_init \
 $(BOARDS)/stm32f4-disc/led \
-$(MCUS)/stm32f407xx/minimal_mcu_init \
 $(CUBE)/STM32F4-Discovery \
 $(CUBE)/STM32F4xx_HAL_Driver_Inc \
 $(CUBE)/CMSIS_STM32F4xx_Inc \
@@ -16,8 +16,8 @@ $(CUBE)/CMSIS_Inc \
 # Directories in which all source files are compiled and linked
 SRC_DIRS = \
 . \
+mcu_init \
 $(MCUS)/stm32f407xx/startup \
-$(MCUS)/stm32f407xx/minimal_mcu_init \
 $(CUBE)/STM32F4xx_HAL_Driver_Src \
 
 # Directories in which source files are cherry-picked
