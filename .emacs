@@ -47,7 +47,6 @@
 ;; Company back ends
 (setq company-backends
       '(company-bbdb company-nxml company-css company-eclim company-xcode company-cmake company-capf
-		     company-c-headers
 		     (company-dabbrev-code company-gtags company-etags company-keywords)
 		     company-oddmuse company-files company-dabbrev))
 
