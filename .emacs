@@ -32,7 +32,7 @@
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
 ;; Keyboard shorcuts
-(global-set-key [f2] 'company-mode)
+(global-set-key [f2] 'company-complete)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
 (global-set-key [f7] 'compile)
@@ -44,14 +44,23 @@
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
 
-;; Enable ggtags
+;; Company back ends
+(setq company-backends
+      '(company-bbdb company-nxml company-css company-eclim company-xcode company-cmake company-capf
+		     company-c-headers
+		     (company-dabbrev-code company-gtags company-etags company-keywords)
+		     company-oddmuse company-files company-dabbrev))
+
+;; Enable various programming language support
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (when (derived-mode-p 'c-mode 'c++-mode)
-	      (ggtags-mode 1))))
+	      (ggtags-mode 1)
+	      (company-mode 1))))
 (add-hook 'asm-mode-hook
 	  (lambda ()
-	      (ggtags-mode 1)))
+	    (ggtags-mode 1)
+	    (company-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
