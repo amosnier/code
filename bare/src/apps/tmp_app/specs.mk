@@ -7,6 +7,7 @@ BASE = ../../..
 INC_DIRS = \
 . \
 mcu_init \
+scheduler \
 $(BOARDS)/stm32f4-disc/led \
 $(CUBE)/STM32F4-Discovery \
 $(CUBE)/STM32F4xx_HAL_Driver_Inc \
@@ -17,6 +18,7 @@ $(CUBE)/CMSIS_Inc \
 SRC_DIRS = \
 . \
 mcu_init \
+scheduler \
 $(MCUS)/stm32f407xx/startup \
 $(CUBE)/STM32F4xx_HAL_Driver_Src \
 

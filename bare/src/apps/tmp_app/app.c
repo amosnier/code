@@ -1,12 +1,20 @@
 #include "led.h"
+#include "scheduler.h"
+
 #include "mcu_init.h"
+
+static void toggle(void);
 
 int main(void)
 {
+	schedule(toggle, 1000 /* ms */);
 	mcu_init();
 	BSP_LED_Init(LED_ORANGE);
 	for (;;) {
-		BSP_LED_Toggle(LED_ORANGE);
-		HAL_Delay(1000); // ms
 	}
+}
+
+static void toggle(void)
+{
+	BSP_LED_Toggle(LED_ORANGE);
 }
