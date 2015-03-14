@@ -12,4 +12,4 @@ source files (`.c` and `.S`) are compiled, and directories where only some files
 `dir_rules.mk` can be included in a Makefile that defines the variable `dir` to
 a list of sub-directories of the current directories to be made by recursive
 make. That method is used to make the whole project from the top Makefile under
-`bare`.
+`bare/`.
