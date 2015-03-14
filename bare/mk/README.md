@@ -2,7 +2,7 @@
 
 The most important of these scripts is `make_app.mk`. An application should
 symlink it to its own Makefile. It then just has to provide a specs.mk file in
-the same directory as the Makefile, that will define the BASE variable, which
+the same directory as the Makefile, that will define the `BASE` variable, which
 contains the path to the base directory of this project (`bare/`), as well as
 other variables that define include path, source files to be compiled, and a
 name for the elf target. The structure supports both directories where all
