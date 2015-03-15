@@ -1,6 +1,6 @@
 #GNU make scripts
 
-## Building an appication
+## Building an application
 The most important of the scripts in this directory is `make_app.mk`. An
 application should symlink it to its own `Makefile`. It then just has to provide
 a `specs.mk` file in the same directory as the `Makefile`, that will define the
