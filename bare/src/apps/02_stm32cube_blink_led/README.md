@@ -32,7 +32,8 @@ complicated part here. The cube is designed to be configured by a few own source
 files provided as templates, but otherwise not changed at all by the application
 developer. Therefore, I chose not to copy the whole code in this repository, but
 rather to point to a standard cube extraction outside of the project directory
-([cube](https://github.com/amosnier/code/blob/master/bare/stm32cubef4)).
+(see links under [cube]
+(https://github.com/amosnier/code/tree/master/bare/src/shared/stm32cubef4)).
 
 ###Makefile
 Introducing the cube as a source code resource that is external to the project
