@@ -22,6 +22,6 @@ system.
 Code shared between several applications is stored under `shared`. No concept of
 library is used. Instead, every application using the concerned modules build
 them. The advantage of this approach is to allow module configuration via
-callback header files, whcih is very simple. The inconvienient is that module
+callback header files, which is very simple. The inconvienient is that module
 building is performed multiple times, but that is not a problem at the current
 volume of code.
