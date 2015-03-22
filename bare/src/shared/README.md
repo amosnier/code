@@ -1,1 +1,1 @@
-#Code common to several applications
+Code common to several applications
