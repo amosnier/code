@@ -13,7 +13,11 @@
 (setq inhibit-splash-screen t)
 
 ;; Load theme
-(load-theme 'wombat)
+(defun zenburn-init ()
+  (load-theme 'zenburn)
+)
+
+(add-hook 'after-init-hook 'zenburn-init)
 
 ;; Configure font
 (set-face-attribute 'default (selected-frame) :height 100)
@@ -60,6 +64,7 @@
 	  (lambda ()
 	    (ggtags-mode 1)
 	    (company-mode 1)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
