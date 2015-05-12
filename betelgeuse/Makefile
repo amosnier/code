@@ -1,7 +1,8 @@
 EXE = betelgeuse
 
 CFLAGS += -Wall
-CXXFLAGS += $(CFLAGS)
+CXXFLAGS += $(CFLAGS) -std=c++11
+LDLIBS += -lSDL2
 
 $(EXE):
 

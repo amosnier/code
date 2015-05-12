@@ -3,6 +3,9 @@
 *.d
 *.map
 *~
+GPATH
+GRTAGS
+GTAGS
 bare/datasheets/*.pdf
 /bare/orig/orig.S
 app
@@ -11,8 +14,5 @@ main
 TAGS
 *.tags
 /bare/test/
-/bare/GPATH
-/bare/GRTAGS
-/bare/GTAGS
 /bare/ID
 /betelgeuse/betelgeuse
