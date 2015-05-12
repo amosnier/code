@@ -13,11 +13,11 @@
 (setq inhibit-splash-screen t)
 
 ;; Load theme
-(defun zenburn-init ()
-  (load-theme 'zenburn)
+(defun theme-init ()
+  (load-theme 'zenburn t)
 )
 
-(add-hook 'after-init-hook 'zenburn-init)
+(add-hook 'after-init-hook 'theme-init)
 
 ;; Configure font
 (set-face-attribute 'default (selected-frame) :height 100)
@@ -36,6 +36,7 @@
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
 ;; Keyboard shorcuts
+(global-set-key [f1] '(lambda ()  (interactive) (ansi-term "/bin/bash")))
 (global-set-key [f2] 'company-complete)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
