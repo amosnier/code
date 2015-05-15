@@ -12,6 +12,9 @@
 
 (setq inhibit-splash-screen t)
 
+;; Avoid magit warning at every start
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;; Load theme
 (defun theme-init ()
   (load-theme 'zenburn t)
