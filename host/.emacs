@@ -38,9 +38,13 @@
 ;; Smart tabs
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
+;; IPython
+(setq python-shell-interpreter "ipython")
+
 ;; Keyboard shorcuts
 (global-set-key [f1] '(lambda ()  (interactive) (ansi-term "/bin/bash")))
-(global-set-key [f2] 'company-complete)
+(global-set-key [f2] 'run-python)
+(global-set-key [f3] 'company-complete)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
 (global-set-key [f7] 'compile)
