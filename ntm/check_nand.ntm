@@ -1,0 +1,8 @@
+0 0 nand
+1 equals
+0 1 nand
+1 equals
+1 0 nand
+1 equals
+1 1 nand
+0 equals
