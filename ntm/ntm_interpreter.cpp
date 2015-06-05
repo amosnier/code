@@ -51,11 +51,11 @@ static Map known_functions(void)
 static void interpret_line(Stack& stack, std::istream& in)
 {
 	std::string token;
+	Map map = known_functions();
 	while (!in.eof()) {
 		in >> token;
 		if (!token_is_good(token))
 			break;
-		Map map = known_functions();
 		auto it = map.find(token);
 		if (it != map.end()) {
 			it->second(stack);
