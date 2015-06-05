@@ -1,13 +1,13 @@
 #include <string>
 #include <sstream>
-#include <stack>
+#include <deque>
 #include <map>
 #include <stdexcept>
 #include <bitset>
 
 #include "ntm_interpreter.hpp"
 
-using Stack = std::deque<std::string>;
+using Stack = std::deque<std::string>; // mostly stack, but dumped FIFO
 using Map = std::map<std::string, void(*)(Stack&)>;
 using Bit = std::bitset<1>;
 
