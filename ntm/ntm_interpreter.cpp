@@ -38,7 +38,7 @@ static void nand(Stack& stack)
 	stack.push_front((~(a & b)).to_string());
 }
 
-Map known_functions(void)
+static Map known_functions(void)
 {
 	Map map;
 	map["nand"] = nand;
