@@ -8,14 +8,13 @@
 GPATH
 GRTAGS
 GTAGS
+GSYMS
 bare/datasheets/*.pdf
 /bare/orig/orig.S
 app
 main
-/bare/dox/*/html
-TAGS
 *.tags
 /bare/test/
 /bare/ID
-/betelgeuse/betelgeuse
-/host/#.bashrc#
+/ntm/*.res
+/ntm/ntm

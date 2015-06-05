@@ -1,9 +1,11 @@
-APPS = ntm_check
+APPS = ntm
 
-CXXFLAGS = -std=c++11
+CXXFLAGS = -Wall -std=c++11
+LDLIBS = -lboost_system -lboost_filesystem
 
-.PHONY: all
-all: $(APPS)
+$(APPS):
+
+ntm: ntm_interpreter.cpp ntm_interpreter.hpp ntm.cpp
 
 .PHONY: clean
 clean:
