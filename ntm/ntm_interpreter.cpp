@@ -16,31 +16,53 @@ static bool token_is_good(const std::string& token)
 	return token.size() != 0 && token.find('#') == std::string::npos;
 }
 
-static void nand(Stack& stack)
+static void assert_not_empty(Stack& stack)
 {
-	if (stack.empty()) {
+	if (stack.empty())
 		throw std::invalid_argument(std::string(__func__) + ": stack empty");
-		return;
-	}
+}
+
+static void neg(Stack& stack)
+{
+	assert_not_empty(stack);
+
 	auto sa = stack.front();
 	stack.pop_front();
 
-	if (stack.empty()) {
-		throw std::invalid_argument(std::string(__func__) + ": stack empty");
-		return;
-	}
-	auto sb = stack.front();
+	Bit a = Bit(stoi(sa, nullptr, 0));
+
+	stack.push_front((~a).to_string());
+}
+
+static void one(Stack& stack)
+{
+	assert_not_empty(stack);
+
+	stack.pop_front();
+
+	stack.push_front("1");
+}
+
+static void nand(Stack& stack)
+{
+	assert_not_empty(stack);
+
+	auto sa = stack.front();
 	stack.pop_front();
 
 	Bit a = Bit(stoi(sa, nullptr, 0));
-	Bit b = Bit(stoi(sb, nullptr, 0));
 
-	stack.push_front((~(a & b)).to_string());
+	if (a[0])
+		neg(stack);
+	else
+		one(stack);
 }
 
 static Map known_functions(void)
 {
 	Map map;
+	map["one"] = one;
+	map["not"] = neg;
 	map["nand"] = nand;
 	return map;
 }
