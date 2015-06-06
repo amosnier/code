@@ -11,7 +11,7 @@ using Stack = std::deque<std::string>; // mostly stack, but dumped FIFO
 using Map = std::map<std::string, void(*)(Stack&)>;
 using Bit = std::bitset<1>;
 
-static bool token_is_good(const std::string& token)
+static bool token_is_valid(const std::string& token)
 {
 	return token.size() != 0 && token.find('#') == std::string::npos;
 }
@@ -76,7 +76,7 @@ static void interpret_line(Stack& stack, std::istream& in)
 	Map map = known_functions();
 	while (!in.eof()) {
 		in >> token;
-		if (!token_is_good(token))
+		if (!token_is_valid(token))
 			break;
 		auto it = map.find(token);
 		if (it != map.end()) {
