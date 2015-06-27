@@ -44,7 +44,6 @@
 ;; Keyboard shorcuts
 (global-set-key [f1] '(lambda () (interactive) (ansi-term "/bin/bash")))
 (global-set-key [f2] 'run-python)
-(global-set-key [f3] 'company-complete)
 (global-set-key [f4] 'tuareg-run-ocaml)
 (global-set-key [f5] 'gdb)
 (global-set-key [f6] 'gdb-many-windows)
@@ -57,22 +56,14 @@
 ;; GDB command
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
 
-;; Company back ends
-(setq company-backends
-      '(company-bbdb company-nxml company-css company-eclim company-xcode company-cmake company-capf
-		     (company-dabbrev-code company-gtags company-etags company-keywords)
-		     company-oddmuse company-files company-dabbrev))
-
 ;; Enable various programming language support
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (when (derived-mode-p 'c-mode 'c++-mode)
-	      (ggtags-mode 1)
-	      (company-mode 1))))
+	      (ggtags-mode 1))))
 (add-hook 'asm-mode-hook
 	  (lambda ()
-	    (ggtags-mode 1)
-	    (company-mode 1)))
+	    (ggtags-mode 1)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
