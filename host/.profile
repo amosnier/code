@@ -21,6 +21,16 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-if [ -d "$HOME/nand2tetris/tools" ] ; then
-    PATH="$HOME/nand2tetris/tools:$PATH"
+# if [ -d "$HOME/nand2tetris/tools" ] ; then
+#     PATH="$HOME/nand2tetris/tools:$PATH"
+# fi
+
+if [ -d "$HOME/Qt/Tools/QtCreator/bin" ] ; then
+    PATH="$HOME/Qt/Tools/QtCreator/bin:$PATH"
 fi
+
+if [ -d "$HOME/cmake-3.3.2-Linux-x86_64/bin" ] ; then
+    PATH="$HOME/cmake-3.3.2-Linux-x86_64/bin:$PATH"
+fi
+
+export EDITOR=emacs
