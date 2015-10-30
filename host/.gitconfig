@@ -14,3 +14,5 @@
 	editor = emacs
 [credential]
 	helper = cache
+[push]
+	default = simple
