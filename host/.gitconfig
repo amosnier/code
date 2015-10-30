@@ -1,0 +1,16 @@
+[user]
+	name = Alain Mosnier
+	email = alain@wanamoon.net
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	au = add -u
+	aa = add -A
+[core]
+	editor = emacs
+[credential]
+	helper = cache

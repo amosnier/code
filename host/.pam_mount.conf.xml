@@ -1,0 +1,6 @@
+<pam_mount>
+
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/alain"    path="alain"    server="brick" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/pictures" path="pictures" server="brick" fstype="cifs" />
+
+</pam_mount>
