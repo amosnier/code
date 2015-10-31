@@ -1,17 +1,17 @@
 <pam_mount>
 
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/alain"     path="alain"      server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/code"      path="code"       server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/common"    path="common"     server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/downloads" path="downloads"  server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/friend"    path="friend"     server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/jinghua"   path="jinghua"    server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/loic"      path="loic"       server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/movies"    path="movies"     server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/music"     path="music"      server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/pictures"  path="pictures"   server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/pixelect"  path="pixelect"   server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/public"    path="public"     server="brick" fstype="cifs" />
-<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/tvshows"   path="tvshows"    server="brick" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/alain"     path="alain"      server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/code"      path="code"       server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/common"    path="common"     server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/downloads" path="downloads"  server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/friend"    path="friend"     server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/jinghua"   path="jinghua"    server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/loic"      path="loic"       server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/movies"    path="movies"     server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/music"     path="music"      server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/pictures"  path="pictures"   server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/pixelect"  path="pixelect"   server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/public"    path="public"     server="192.168.1.250" fstype="cifs" />
+<volume options="nodev,nosuid" user="*" mountpoint="/home/alain/custom/server/tvshows"   path="tvshows"    server="192.168.1.250" fstype="cifs" />
 
 </pam_mount>
