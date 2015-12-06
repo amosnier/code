@@ -118,3 +118,6 @@ fi
 
 # More bash history
 export HISTSIZE=10000
+
+# Docker machine in prompt
+export PS1='[\u@\h \W$(__docker_machine_ps1 " [%s]")]\$ '
