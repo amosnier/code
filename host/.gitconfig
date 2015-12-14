@@ -10,6 +10,8 @@
 	last = log -1 HEAD
 	au = add -u
 	aa = add -A
+	tree = log --all --graph --decorate --pretty=oneline --abbrev-commit
+	ds = diff --staged
 [core]
 	editor = emacs
 [credential]
