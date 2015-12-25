@@ -121,3 +121,8 @@ export HISTSIZE=10000
 
 # Docker machine in prompt
 export PS1='[\u@\h:\w$(__docker_machine_ps1 " [%s]")]\$ '
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/custom/.virtualenvs
+export PROJECT_HOME=$HOME/custom/python_projects
+source /usr/local/bin/virtualenvwrapper.sh
