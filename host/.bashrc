@@ -125,4 +125,4 @@ export PS1='[\u@\h:\w$(__docker_machine_ps1 " [%s]")]\$ '
 # virtualenvwrapper
 export WORKON_HOME=$HOME/custom/.virtualenvs
 export PROJECT_HOME=$HOME/custom/python_projects
-source /usr/local/bin/virtualenvwrapper.sh
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
