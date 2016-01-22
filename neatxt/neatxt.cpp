@@ -1,50 +1,56 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <fstream>
-
-static void open_file(const std::string& name)
+#include <GLFW/glfw3.h>
+#include <stdlib.h>
+#include <stdio.h>
+static void error_callback(int error, const char* description)
 {
-	std::fstream s(name);
-	while (!s.eof()) {
-		std::string line;
-		getline(s, line);
-		std::cout << line << std::endl;
-	}
-	s.close();
+    fputs(description, stderr);
 }
-
-static void interpret_open(std::istream& is)
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	std::string name;
-	is >> name;
-	if (name.size() == 0)
-		std::cout << "so you want to open the current directory?";
-	else
-		open_file(name);
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);
 }
-
-static void interpret_line(const std::string& line)
+int main(void)
 {
-	std::istringstream is(line);
-	std::string command;
-	is >> command;
-	if (command == "help")
-		std::cout << "welcome to neatxt!";
-	else if (command == "open")
-		interpret_open(is);
-	else
-		std::cout << "unknown command";
-}
-
-int main()
-{
-	for (;;) {
-		std::string line;
-		std::cout << "> ";
-		std::getline(std::cin, line);
-		interpret_line(line);
-		std::cout << std::endl;
-		       
-	}
+    GLFWwindow* window;
+    glfwSetErrorCallback(error_callback);
+    if (!glfwInit())
+        exit(EXIT_FAILURE);
+    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+    if (!window)
+    {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+    glfwSetKeyCallback(window, key_callback);
+    while (!glfwWindowShouldClose(window))
+    {
+        float ratio;
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+        ratio = width / (float) height;
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+        glBegin(GL_TRIANGLES);
+        glColor3f(1.f, 0.f, 0.f);
+        glVertex3f(-0.6f, -0.4f, 0.f);
+        glColor3f(0.f, 1.f, 0.f);
+        glVertex3f(0.6f, -0.4f, 0.f);
+        glColor3f(0.f, 0.f, 1.f);
+        glVertex3f(0.f, 0.6f, 0.f);
+        glEnd();
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    exit(EXIT_SUCCESS);
 }
