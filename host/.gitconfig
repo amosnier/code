@@ -13,7 +13,6 @@
 	tree = log --all --graph --decorate --pretty=oneline --abbrev-commit
 	ds = diff --staged
 [core]
-	editor = emacs
 [credential]
 	helper = cache
 [push]
