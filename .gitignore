@@ -15,7 +15,3 @@ app
 main
 *.tags
 bare/test/
-bare/ID
-ntm/*.res
-ntm/ntm
-neatxt/neatxt
