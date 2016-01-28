@@ -9,3 +9,5 @@
 bare/datasheets/*.pdf
 bare/orig/orig.S
 bare/test/
+bare/**/app
+bare/**/main
