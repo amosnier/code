@@ -5,13 +5,7 @@
 *~
 #*
 .#*
-GPATH
-GRTAGS
-GTAGS
-GSYMS
+*.swp
 bare/datasheets/*.pdf
 bare/orig/orig.S
-app
-main
-*.tags
 bare/test/

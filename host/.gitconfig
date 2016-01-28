@@ -17,3 +17,5 @@
 	helper = cache
 [push]
 	default = simple
+[core]
+	editor = vi
