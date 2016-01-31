@@ -5,6 +5,8 @@ static void led_on(void);
 static void led_off(void);
 static void busy_wait(void);
 
+int main(void);
+
 int main(void)
 {
 	led_config();
