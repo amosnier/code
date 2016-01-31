@@ -48,5 +48,5 @@ static void led_off(void)
 static void busy_wait(void)
 {
 	for (int i = 0; i < 10000000; i++)
-		asm(""); // prevent the compiler to optimize out the whole function
+		asm(""); // prevent the compiler from optimizing out the whole function
 }
