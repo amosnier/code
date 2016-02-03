@@ -41,10 +41,11 @@
 extern uint32_t __etext;
 extern uint32_t __data_start__;
 extern uint32_t __data_end__;
-extern uint32_t __copy_table_start__;
-extern uint32_t __copy_table_end__;
-extern uint32_t __zero_table_start__;
-extern uint32_t __zero_table_end__;
+// Available but unused symbols, commented out to prevent warnings
+//extern uint32_t __copy_table_start__;
+//extern uint32_t __copy_table_end__;
+//extern uint32_t __zero_table_start__;
+//extern uint32_t __zero_table_end__;
 extern uint32_t __bss_start__;
 extern uint32_t __bss_end__;
 extern uint32_t __StackTop;
@@ -82,13 +83,13 @@ void Reset_Handler(void);                            /* Reset Handler */
 #ifndef __STACK_SIZE
   #define	__STACK_SIZE  0x00000400
 #endif
-static uint8_t stack[__STACK_SIZE] __attribute__ ((aligned(8), used, section(".stack")));
+uint8_t stack[__STACK_SIZE] __attribute__ ((aligned(8), used, section(".stack")));
 
 #ifndef __HEAP_SIZE
   #define	__HEAP_SIZE   0x00000C00
 #endif
 #if __HEAP_SIZE > 0
-static uint8_t heap[__HEAP_SIZE]   __attribute__ ((aligned(8), used, section(".heap")));
+uint8_t heap[__HEAP_SIZE]   __attribute__ ((aligned(8), used, section(".heap")));
 #endif
 
 
