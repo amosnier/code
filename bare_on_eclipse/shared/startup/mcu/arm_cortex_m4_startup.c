@@ -1,4 +1,4 @@
-/* Copy of startup_ARMCM4.c
+/* Copy of startup_ARMCM4.c from CMSIS package from ARM
  * Purpose: startup file for Cortex-M4 devices.
  *          Should be used with GCC 'GNU Tools ARM Embedded'
  * Version: V1.01

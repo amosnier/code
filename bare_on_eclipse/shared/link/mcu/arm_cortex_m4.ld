@@ -1,4 +1,8 @@
-INCLUDE "mem.ld"
+/*
+ * Originally copied from CMSIS-SP-00300-r4p5-00rel0/Device/ARM/ARMCM4/Source/GCC/gcc_arm.ld
+ * MEMORY part removed from this script, taken care of by memory map specific
+ * scripts instead.
+ */
 
 /* Library configurations */
 GROUP(libgcc.a libc.a libm.a libnosys.a)
