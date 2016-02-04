@@ -46,19 +46,34 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>link/mcu/arm_cortex_m4.ld</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/link/mcu/arm_cortex_m4.ld</locationURI>
+			<name>link/mcu/arm_cortex_m4</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>link/mcu/stm32f407vgtx_mem.ld</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/link/mcu/stm32f407vgtx_mem.ld</locationURI>
+			<name>link/mcu/stm32f407vgtx</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>startup/mcu/arm_cortex_m4_startup.c</name>
+			<name>startup/mcu/arm_cortex_m4</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>link/mcu/arm_cortex_m4/link.ld</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/startup/mcu/arm_cortex_m4_startup.c</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/link/mcu/arm_cortex_m4/link.ld</locationURI>
+		</link>
+		<link>
+			<name>link/mcu/stm32f407vgtx/mem.ld</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/link/mcu/stm32f407vgtx/mem.ld</locationURI>
+		</link>
+		<link>
+			<name>startup/mcu/arm_cortex_m4/startup.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/shared/startup/mcu/arm_cortex_m4/startup.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
