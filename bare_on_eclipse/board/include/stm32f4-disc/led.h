@@ -1,5 +1,5 @@
-#ifndef LED_H
-#define LED_H
+#ifndef INCLUDE_STM32F4_DISC_LED_H_
+#define INCLUDE_STM32F4_DISC_LED_H_
 
 #include "stm32f4_discovery.h"
 
@@ -8,5 +8,4 @@
 #define LED_RED    LED5
 #define LED_BLUE   LED6
 
-
-#endif // LED_H
+#endif /* INCLUDE_STM32F4_DISC_LED_H_ */

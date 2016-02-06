@@ -24,4 +24,26 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>board</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>board/include</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>board/include/stm32f4-disc</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>board/include/stm32f4-disc/led.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/board/include/stm32f4-disc/led.h</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
