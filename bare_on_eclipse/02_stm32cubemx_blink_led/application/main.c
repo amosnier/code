@@ -81,16 +81,19 @@ int main(void)
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	while (true)
-	{
+	while(true) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		while(true) {
-			if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET) {
-				HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-				HAL_Delay(1000);
-			}
+		if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET) {
+			HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+			HAL_Delay(50);
+			HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
+			HAL_Delay(50);
+			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
+			HAL_Delay(50);
+			HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+			HAL_Delay(50);
 		}
 	}
 	/* USER CODE END 3 */
@@ -105,7 +108,8 @@ void SystemClock_Config(void)
 	RCC_OscInitTypeDef RCC_OscInitStruct;
 	RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
-	__PWR_CLK_ENABLE();
+	__PWR_CLK_ENABLE()
+	;
 
 	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -120,15 +124,15 @@ void SystemClock_Config(void)
 	RCC_OscInitStruct.PLL.PLLQ = 7;
 	HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-			|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1
+			| RCC_CLOCKTYPE_PCLK2;
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
 	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV8;
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV4;
 	HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0);
 
-	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
 
 	HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 
@@ -153,7 +157,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 {
 	/* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
-    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	 ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 	/* USER CODE END 6 */
 
 }
