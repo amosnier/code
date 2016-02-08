@@ -2,9 +2,9 @@
 Procedure:
 - Standard project for STM32F4-Discovery generated from STM32CubeMX with the
 following options:
-..* Toolchain SW4STM32
-..* Copy only the necessary library files
-..* Generate peripheral initialization
+  - Toolchain SW4STM32
+  - Copy only the necessary library files
+  - Generate peripheral initialization
 - [GNU ARM Eclipse](http://GNU ARM Eclipse) project generated for STM32F4xx.
 All files are then removed.
 - Files for the CubeMX project are then added manually under a custom file
