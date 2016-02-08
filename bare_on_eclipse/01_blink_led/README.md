@@ -5,6 +5,7 @@
 (https://launchpad.net/gcc-arm-embedded) samples.
 - No involvement of STM32F4Cube yet, but the memory part of the linker script is
 adapted do the STM32F407xx.
+
 ##Binary size
 ```bash
 Invoking: Cross ARM GNU Print Size

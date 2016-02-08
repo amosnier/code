@@ -9,6 +9,7 @@ following options:
 All files are then removed.
 - Files for the CubeMX project are then added manually under a custom file
 structure and the compiler and linker flags are also adpated manually.
+
 ##Binary size
 ```bash
 Invoking: Cross ARM GNU Print Size
