@@ -20,7 +20,7 @@ I reach that goal in the following manner.
 ##Exceptions
 There are a few changes that are necessary under stm32cubemx_generated_code every time the contents are replaced:
 - Call the application's main function in main.c. E.g.:
-  - #include "appl_main.c"
+  - #include "appl_main.h"
   - Invoke appl_main() from main(), under the main while (1).
 - Because of a bug in Eclipse CDT, that seems surprinsingly hard to come around, rename tm32cubemx_generated_code/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f407xx.s to startup_stm32f407xx.S (change the case of the extension to uppercase, so it gets compiled).
 
