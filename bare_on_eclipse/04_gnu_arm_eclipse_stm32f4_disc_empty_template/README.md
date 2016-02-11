@@ -24,7 +24,7 @@ There are a few changes that are necessary under stm32cubemx_generated_code ever
   - Invoke appl_main() from main(), under the main while (1).
 - Because of a bug in Eclipse CDT, that seems surprinsingly hard to come around, rename stm32cubemx_generated_code/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f407xx.s to startup_stm32f407xx.S (change the case of the extension to uppercase, so it gets compiled).
 
-One could also appy the same principle to some appl_init() function that could be invoked from main.c, before the main loop if somehow the hardware initialization performed by STM32CubeMX was not entirely satisfying (I haven't had that problem so far).
+One could also apply the same principle to some appl_init() function that could be invoked from main.c, before the main loop if somehow the hardware initialization performed by STM32CubeMX was not entirely satisfying (I haven't had that problem so far).
 
 ##Using the "template"
  - Open the project. Copy/paste it to a name of your liking.
