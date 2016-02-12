@@ -1,7 +1,8 @@
 #include "app_main.h"
 
-void app_main(void)
+int app_main(void)
 {
 	while (1)
 		;
+	return 0;
 }
