@@ -83,13 +83,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-	  app_main();
-  }
+  return app_main();
   /* USER CODE END 3 */
 
 }
@@ -148,11 +145,9 @@ void SystemClock_Config(void)
    */
 void assert_failed(uint8_t* file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
-
+	/* USER CODE BEGIN 6 */
+	halt((char*)file, (int)line);
+	/* USER CODE END 6 */
 }
 
 #endif

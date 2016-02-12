@@ -1,9 +1,10 @@
 #include "app_main.h"
 #include <stdio.h>
 
-void app_main(void)
+int app_main(void)
 {
-	printf("Hello world\n\r");
+	printf("Hello, world!\r\n");
 	while (1)
 		;
+	return 0;
 }
