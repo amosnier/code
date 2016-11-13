@@ -117,4 +117,4 @@ if ! shopt -oq posix; then
 fi
 
 # Alain
-export PATH=~/.local/bin:$PATH
+export WORKON_HOME=~/virtualenvs
