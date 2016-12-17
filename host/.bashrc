@@ -117,4 +117,5 @@ if ! shopt -oq posix; then
 fi
 
 # Alain
-export WORKON_HOME=~/virtualenvs
+export WORKON_HOME=~/custom/.virtualenvs
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
