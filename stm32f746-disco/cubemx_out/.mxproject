@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/home/alain/custom/repos/code/stm32f746-disco/cubemx-out/cubemx_out/Inc
+HeaderPath=/home/alain/custom/repos/code/stm32f746-disco/cubemx_out/Inc
 HeaderFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;
-SourcePath=/home/alain/custom/repos/code/stm32f746-disco/cubemx-out/cubemx_out/Src
+SourcePath=/home/alain/custom/repos/code/stm32f746-disco/cubemx_out/Src
 SourceFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;stm32f7xx_it.c;stm32f7xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]
