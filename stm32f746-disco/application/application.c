@@ -2,5 +2,6 @@
 
 void application(void)
 {
-	print_welcome();
+	console_print_welcome();
+	console_start_rx();
 }
