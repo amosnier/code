@@ -9,9 +9,6 @@ static const char WELCOME1[] = "Welcome to STM32F746-Discovery!\r\n";
 static const char WELCOME2[] = "===============================\r\n\n";
 
 static uint8_t rx_char;
-static uint8_t buf[256];
-static uint8_t *in;
-static uint8_t *out;
 
 /*
  * _write() is a poorly documented weak callback from newlib that
@@ -40,7 +37,18 @@ void console_print_welcome(void)
 
 void console_char_received(void)
 {
-	printf("%d", rx_char);
+	static uint8_t tx_char;
+	tx_char = rx_char;
+
+	/*
+	 * Just try to echo back in interrupt mode (non-blocking, but will only work if the previous TX
+	 * character has already made its way out), for now.
+	 * Notes:
+	 * - tx_char, like rx_char, must be static: HAL_UART_Transmit_IT() does not make its own copy!
+	 * - We cannot pass rx_char instead of tx_char, since it will immediately be reused for RX
+	 *   when this function has returned.
+	 */
+	(void) HAL_UART_Transmit_IT(&huart1, &tx_char, 1);
 	console_start_rx();
 }
 
