@@ -10,6 +10,8 @@ static const char NEWLINE[] = "\r\n";
 static const char WELCOME1[] = "Welcome to STM32F746-Discovery!\r\n";
 static const char WELCOME2[] = "===============================\r\n\n";
 
+static const char DEL = 127;
+
 static uint8_t rx_char;
 
 static char rx_command[256];
@@ -47,7 +49,7 @@ static bool rx_command_full(void)
 
 static void interpret_received_char(char c)
 {
-	if (c == '\b')
+	if (c == DEL)
 	{
 		if (rx_pos > rx_command)
 			--rx_pos;
@@ -63,7 +65,7 @@ void console_char_received(void)
 	static uint8_t tx_char;
 	tx_char = rx_char;
 
-	if ((!rx_command_full() && isprint(rx_char)) || rx_char == '\b')
+	if ((!rx_command_full() && isprint(rx_char)) || rx_char == DEL)
 	{
 		/*
 		 * Try to echo back in interrupt mode (non-blocking, but will only work if the previous TX
