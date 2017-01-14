@@ -6,7 +6,7 @@
 
 static const char TOP_LEFT[] = "\033[0;0H";
 static const char CLEAR[] = "\033[2J";
-static const char PROMPT[] = "746-disco> ";
+static const char PROMPT[] = "\r\nf746-disco> ";
 
 static const char DEL = 127;
 
@@ -46,8 +46,8 @@ void console_print_welcome(void)
 {
 	printf(TOP_LEFT);
 	printf(CLEAR);
-	printf("\r\nWelcome to STM32F746-Discovery!\r\n");
-	printf("===============================\r\n\n");
+	printf("\r\nWelcome to the STM32F746-Discovery!\r\n");
+	printf("===================================\r\n\n");
 	printf(PROMPT);
 }
 
