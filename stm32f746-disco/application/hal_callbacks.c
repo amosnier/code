@@ -9,6 +9,6 @@
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart == &huart1)
-		console_char_received();
+		console_receive_char();
 }
 

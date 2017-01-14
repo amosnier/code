@@ -6,16 +6,25 @@
 
 static const char TOP_LEFT[] = "\033[0;0H";
 static const char CLEAR[] = "\033[2J";
-static const char NEWLINE[] = "\r\n";
-static const char WELCOME1[] = "Welcome to STM32F746-Discovery!\r\n";
-static const char WELCOME2[] = "===============================\r\n\n";
+static const char PROMPT[] = "746-disco> ";
 
 static const char DEL = 127;
 
-static uint8_t rx_char;
+static char rx_char;
 
-static char rx_command[256];
+static char rx_command[64];
 static char *rx_pos = rx_command;
+
+static bool command_received = false;
+
+void console_init(void)
+{
+	/*
+	 * Disable I/O buffering for STDOUT stream, so that
+	 * chars are sent out as soon as they are printed.
+	 */
+	setvbuf(stdout, NULL, _IONBF, 0);
+}
 
 /*
  * _write() is a poorly documented weak callback from newlib that
@@ -37,9 +46,9 @@ void console_print_welcome(void)
 {
 	printf(TOP_LEFT);
 	printf(CLEAR);
-	printf(NEWLINE);
-	printf(WELCOME1);
-	printf(WELCOME2);
+	printf("\r\nWelcome to STM32F746-Discovery!\r\n");
+	printf("===============================\r\n\n");
+	printf(PROMPT);
 }
 
 static bool rx_command_full(void)
@@ -47,42 +56,34 @@ static bool rx_command_full(void)
 	return rx_pos == rx_command + sizeof rx_command - 1;
 }
 
-static void interpret_received_char(char c)
+void console_receive_char(void)
 {
-	if (c == DEL)
-	{
-		if (rx_pos > rx_command)
-			--rx_pos;
-	}
+	static char tx_char1;
+	static char tx_char2;
+	static char* tx_char;
+	static bool using_tx_char1 = true;
+
+	if (using_tx_char1)
+		tx_char = &tx_char1;
 	else
-	{
-		*rx_pos++ = c;
-	}
-}
+		tx_char = &tx_char2;
 
-void console_char_received(void)
-{
-	static uint8_t tx_char;
-	tx_char = rx_char;
+	*tx_char = rx_char;
+	using_tx_char1 = !using_tx_char1;
 
-	if ((!rx_command_full() && isprint(rx_char)) || rx_char == DEL)
-	{
-		/*
-		 * Try to echo back in interrupt mode (non-blocking, but will only work if the previous TX
-		 * character has already made its way out).
-		 * Notes:
-		 * - tx_char, like rx_char, must be static: HAL_UART_Transmit_IT() does not make its own copy!
-		 * - We cannot pass rx_char instead of tx_char, since it will immediately be reused for RX
-		 *   when this function has returned.
-		 * - We only consider the character as received if it was successfully echoed back.
-		 */
-		if (HAL_UART_Transmit_IT(&huart1, &tx_char, 1) == HAL_OK)
-		{
-			interpret_received_char((char) rx_char);
-		}
+	if (!rx_command_full() && isprint(rx_char))	{
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t *) tx_char, 1) == HAL_OK)
+			*rx_pos++ = rx_char;
+	} else if (rx_pos > rx_command && rx_char == DEL) {
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t *) tx_char, 1) == HAL_OK)
+			--rx_pos;
+	} else if (rx_char == '\r')	{
+		*rx_pos = 0; // NULL-termination
+		command_received = true;
 	}
 
-	console_start_rx();
+	if (!command_received)
+		console_start_rx();
 }
 
 /*
@@ -91,5 +92,16 @@ void console_char_received(void)
  */
 void console_start_rx(void)
 {
-	assert(HAL_UART_Receive_IT(&huart1, &rx_char, 1) == HAL_OK);
+	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
+}
+
+void console_handle_rx_event(void)
+{
+	if (command_received) {
+		printf("\r\nYou have entered \"%s\"\r\n", rx_command);
+		printf(PROMPT);
+		rx_pos = rx_command;
+		command_received = false;
+		console_start_rx();
+	}
 }
