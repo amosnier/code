@@ -1,5 +1,6 @@
 #include "console.h"
 #include "hal_globals.h"
+#include "stm32f7xx_hal_uart_additions.h"
 #include <assert.h>
 #include <stdbool.h>
 #include <ctype.h>
@@ -58,24 +59,11 @@ static bool rx_command_full(void)
 
 void console_receive_char(void)
 {
-	static char tx_char1;
-	static char tx_char2;
-	static char* tx_char;
-	static bool using_tx_char1 = true;
-
-	if (using_tx_char1)
-		tx_char = &tx_char1;
-	else
-		tx_char = &tx_char2;
-
-	*tx_char = rx_char;
-	using_tx_char1 = !using_tx_char1;
-
 	if (!rx_command_full() && isprint(rx_char))	{
-		if (HAL_UART_Transmit_IT(&huart1, (uint8_t *) tx_char, 1) == HAL_OK)
+		if (HAL_UART_TransmitByte(&huart1, (uint8_t) rx_char) == HAL_OK)
 			*rx_pos++ = rx_char;
 	} else if (rx_pos > rx_command && rx_char == DEL) {
-		if (HAL_UART_Transmit_IT(&huart1, (uint8_t *) tx_char, 1) == HAL_OK)
+		if (HAL_UART_TransmitByte(&huart1, (uint8_t) rx_char) == HAL_OK)
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
