@@ -59,6 +59,17 @@ static bool rx_command_full(void)
 
 void console_receive_char(void)
 {
+	/*
+	 * Strategy: if the received character is printable or a delete, and we can buffer it,
+	 * we try to echo it. If we manage to echo it, we buffer it. If the received character
+	 * is a carriage return, we NULL-terminate the buffer and signal that a command has been
+	 * received to the command handling context.
+	 * In all other cases, we ignore the received character.
+	 * In the carriage return case, the command handling context will re-enable reception
+	 * when it is finished (RX is ignored while handling a command). Otherwise, we re-enable
+	 * reception immediately.
+	 */
+
 	if (!rx_command_full() && isprint(rx_char))	{
 		if (HAL_UART_TransmitByte(&huart1, (uint8_t) rx_char) == HAL_OK)
 			*rx_pos++ = rx_char;
