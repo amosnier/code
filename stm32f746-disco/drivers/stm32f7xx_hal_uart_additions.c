@@ -5,6 +5,7 @@
   * @param huart: UART handle.
   * @param byte: byte to send.
   * @retval HAL status
+  * @note: not reentrant, and might conflict with standard HAL UART functions, but they are not thread-safe anyway.
   */
 HAL_StatusTypeDef HAL_UART_TransmitByte(UART_HandleTypeDef *huart, uint8_t byte)
 {
