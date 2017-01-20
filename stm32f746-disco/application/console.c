@@ -15,8 +15,6 @@ static char rx_char;
 static char rx_command[64];
 static char *rx_pos = rx_command;
 
-static bool command_received = false;
-
 void console_init(void)
 {
 	/*
@@ -56,6 +54,13 @@ static bool rx_command_full(void)
 	return rx_pos == rx_command + sizeof rx_command - 1;
 }
 
+static void console_handle_command(void)
+{
+	printf("\r\nYou have entered \"%s\"\r\n", rx_command);
+	printf(PROMPT);
+	rx_pos = rx_command;
+}
+
 void console_receive_completed(void)
 {
 	/*
@@ -64,9 +69,9 @@ void console_receive_completed(void)
 	 * is a carriage return, we NULL-terminate the buffer and signal that a command has been
 	 * received to the command handling context.
 	 * In all other cases, we ignore the received character.
-	 * In the carriage return case, the command handling context will re-enable reception
-	 * when it is finished (RX is ignored while handling a command). Otherwise, we re-enable
-	 * reception in the TX ready callback, or at once if we do not echo.
+	 * In the carriage return case, we re-enable reception when the command has been handled
+	 * (RX is ignored while handling a command). Otherwise, we re-enable reception in the TX
+	 * completed callback, or at once if we do not echo.
 	 */
 
 	static char tx_char;
@@ -81,7 +86,8 @@ void console_receive_completed(void)
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
-		command_received = true;
+		console_handle_command();
+		console_receive_char();
 	} else {
 		console_receive_char();
 	}
@@ -94,15 +100,4 @@ void console_receive_completed(void)
 void console_receive_char(void)
 {
 	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
-}
-
-void console_handle_rx_event(void)
-{
-	if (command_received) {
-		printf("\r\nYou have entered \"%s\"\r\n", rx_command);
-		printf(PROMPT);
-		rx_pos = rx_command;
-		command_received = false;
-		console_receive_char();
-	}
 }
