@@ -1,6 +1,5 @@
 #include "console.h"
 #include "hal_globals.h"
-#include "stm32f7xx_hal_uart_additions.h"
 #include <assert.h>
 #include <stdbool.h>
 #include <ctype.h>
@@ -57,7 +56,7 @@ static bool rx_command_full(void)
 	return rx_pos == rx_command + sizeof rx_command - 1;
 }
 
-void console_receive_char(void)
+void console_receive_completed(void)
 {
 	/*
 	 * Strategy: if the received character is printable or a delete, and we can buffer it,
@@ -67,29 +66,32 @@ void console_receive_char(void)
 	 * In all other cases, we ignore the received character.
 	 * In the carriage return case, the command handling context will re-enable reception
 	 * when it is finished (RX is ignored while handling a command). Otherwise, we re-enable
-	 * reception immediately.
+	 * reception in the TX ready callback, or at once if we do not echo.
 	 */
 
+	static char tx_char;
+
+	tx_char = rx_char;
+
 	if (!rx_command_full() && isprint(rx_char))	{
-		if (HAL_UART_TransmitByte(&huart1, (uint8_t) rx_char) == HAL_OK)
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK)
 			*rx_pos++ = rx_char;
 	} else if (rx_pos > rx_command && rx_char == DEL) {
-		if (HAL_UART_TransmitByte(&huart1, (uint8_t) rx_char) == HAL_OK)
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK)
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
 		command_received = true;
+	} else {
+		console_receive_char();
 	}
-
-	if (!command_received)
-		console_start_rx();
 }
 
 /*
  * Receive a character in interrupt mode.
  * Does not block!
  */
-void console_start_rx(void)
+void console_receive_char(void)
 {
 	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
 }
@@ -101,6 +103,6 @@ void console_handle_rx_event(void)
 		printf(PROMPT);
 		rx_pos = rx_command;
 		command_received = false;
-		console_start_rx();
+		console_receive_char();
 	}
 }

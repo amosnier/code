@@ -4,7 +4,7 @@ void application(void)
 {
 	console_init();
 	console_print_welcome();
-	console_start_rx();
+	console_receive_char();
 
 	for (;;)
 	{
