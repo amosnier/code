@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <console_commands.h>
 
 static const char TOP_LEFT[] = "\033[0;0H";
 static const char CLEAR[] = "\033[2J";
@@ -54,13 +55,6 @@ static bool rx_command_full(void)
 	return rx_pos == rx_command + sizeof rx_command - 1;
 }
 
-static void console_handle_command(void)
-{
-	printf("\r\nYou have entered \"%s\"\r\n", rx_command);
-	printf(PROMPT);
-	rx_pos = rx_command;
-}
-
 void console_receive_completed(void)
 {
 	/*
@@ -86,7 +80,9 @@ void console_receive_completed(void)
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
-		console_handle_command();
+		console_interpret_command(rx_command);
+		printf(PROMPT);
+		rx_pos = rx_command;
 		console_receive_char();
 	} else {
 		console_receive_char();

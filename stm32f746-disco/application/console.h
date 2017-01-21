@@ -1,5 +1,5 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#ifndef APPLICATION_CONSOLE_H_
+#define APPLICATION_CONSOLE_H_
 
 void console_init(void);
 void console_print_welcome(void);
@@ -11,4 +11,4 @@ inline void console_transmit_completed(void)
 	console_receive_char();
 }
 
-#endif // CONSOLE_H
+#endif // APPLICATION_CONSOLE_H_
