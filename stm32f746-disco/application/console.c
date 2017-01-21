@@ -80,7 +80,7 @@ void console_receive_completed(void)
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
-		console_interpret_command(rx_command);
+		console_handle_command(rx_command);
 		printf(PROMPT);
 		rx_pos = rx_command;
 		console_receive_char();
