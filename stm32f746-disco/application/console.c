@@ -50,7 +50,7 @@ void console_print_welcome(void)
 	printf(PROMPT);
 }
 
-static bool rx_command_full(void)
+static inline bool rx_command_full(void)
 {
 	return rx_pos == rx_command + sizeof rx_command - 1;
 }
@@ -60,12 +60,16 @@ void console_receive_completed(void)
 	/*
 	 * Strategy: if the received character is printable or a delete, and we can buffer it,
 	 * we try to echo it. If we manage to echo it, we buffer it. If the received character
-	 * is a carriage return, we NULL-terminate the buffer and signal that a command has been
-	 * received to the command handling context.
+	 * is a carriage return, we NULL-terminate the buffer and handle the command.
 	 * In all other cases, we ignore the received character.
 	 * In the carriage return case, we re-enable reception when the command has been handled
 	 * (RX is ignored while handling a command). Otherwise, we re-enable reception in the TX
 	 * completed callback, or at once if we do not echo.
+	 *
+	 * Note: yes, we handle the command in this ISR-context, which might take ages. But
+	 * reception is disabled anyway during that time. We might block interrupts with a
+	 * priority that is lower or equal to ours. If this is a problem, these interrupts
+	 * shall be moved to a higher priority.
 	 */
 
 	static char tx_char;
