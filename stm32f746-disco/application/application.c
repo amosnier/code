@@ -10,6 +10,6 @@ void application(void)
 
 	while (true)
 	{
-		console_transmit_completed();
+		console_check_and_handle_command();
 	}
 }
