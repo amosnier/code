@@ -15,6 +15,7 @@ static char rx_char;
 
 static char rx_command[64];
 static char *rx_pos = rx_command;
+static bool command_received = false;
 
 void console_init(void)
 {
@@ -57,39 +58,25 @@ static inline bool rx_command_full(void)
 
 void console_receive_completed(void)
 {
-	/*
-	 * Strategy: if the received character is printable or a delete, and we can buffer it,
-	 * we try to echo it. If we manage to echo it, we buffer it. If the received character
-	 * is a carriage return, we NULL-terminate the buffer and handle the command.
-	 * In all other cases, we ignore the received character.
-	 * In the carriage return case, we re-enable reception when the command has been handled
-	 * (RX is ignored while handling a command). Otherwise, we re-enable reception in the TX
-	 * completed callback, or at once if we do not echo.
-	 *
-	 * Note: yes, we handle the command in this ISR-context, which might take ages. But
-	 * reception is disabled anyway during that time. We might block interrupts with a
-	 * priority that is lower or equal to ours. If this is a problem, these interrupts
-	 * shall be moved to a higher priority.
-	 */
+	if (command_received)
+		return; // implement command interruption (CTRL-C?) here
 
 	static char tx_char;
 
 	tx_char = rx_char;
 
 	if (!rx_command_full() && isprint(rx_char))	{
-		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK)
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK) // enable RX in TX callback
 			*rx_pos++ = rx_char;
 	} else if (rx_pos > rx_command && rx_char == DEL) {
-		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK)
+		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK) // enable RX in TX callback
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
-		console_handle_command(rx_command);
-		printf(PROMPT);
-		rx_pos = rx_command;
-		console_receive_char();
+		command_received = true;
+		console_receive_char(); // enable RX to support interruption of command execution
 	} else {
-		console_receive_char();
+		console_receive_char(); // character ignored, enable RX
 	}
 }
 
@@ -100,4 +87,15 @@ void console_receive_completed(void)
 void console_receive_char(void)
 {
 	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
+}
+
+void console_check_and_handle_command(void)
+{
+	if (command_received)
+	{
+		console_handle_command(rx_command);
+		printf(PROMPT);
+		rx_pos = rx_command;
+		command_received = false;
+	}
 }
