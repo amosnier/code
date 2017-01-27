@@ -13,9 +13,8 @@ static const char DEL = 127;
 
 static char rx_char;
 
-static char rx_command[64];
-static char *rx_pos = rx_command;
-static bool command_received = false;
+static char command[64];
+static char *rx_pos = command;
 
 void console_init(void)
 {
@@ -53,14 +52,11 @@ void console_print_welcome(void)
 
 static inline bool rx_command_full(void)
 {
-	return rx_pos == rx_command + sizeof rx_command - 1;
+	return rx_pos == command + sizeof command - 1;
 }
 
 void console_receive_completed(void)
 {
-	if (command_received)
-		return; // implement command interruption (CTRL-C?) here
-
 	static char tx_char;
 
 	tx_char = rx_char;
@@ -68,13 +64,12 @@ void console_receive_completed(void)
 	if (!rx_command_full() && isprint(rx_char))	{
 		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK) // enable RX in TX callback
 			*rx_pos++ = rx_char;
-	} else if (rx_pos > rx_command && rx_char == DEL) {
+	} else if (rx_pos > command && rx_char == DEL) {
 		if (HAL_UART_Transmit_IT(&huart1, (uint8_t*) &tx_char, 1) == HAL_OK) // enable RX in TX callback
 			--rx_pos;
 	} else if (rx_char == '\r')	{
 		*rx_pos = 0; // NULL-termination
-		command_received = true;
-		console_receive_char(); // enable RX to support interruption of command execution
+		console_command_received();
 	} else {
 		console_receive_char(); // character ignored, enable RX
 	}
@@ -89,13 +84,14 @@ void console_receive_char(void)
 	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
 }
 
-void console_check_and_handle_command(void)
+void console_command_handled(void)
 {
-	if (command_received)
-	{
-		console_handle_command(rx_command);
-		printf(PROMPT);
-		rx_pos = rx_command;
-		command_received = false;
-	}
+	printf(PROMPT);
+	rx_pos = command;
+	console_receive_char();
+}
+
+const char * console_command(void)
+{
+	return command;
 }

@@ -8,8 +8,7 @@ void application(void)
 	console_print_welcome();
 	console_receive_char();
 
-	while (true)
-	{
-		console_check_and_handle_command();
+	while (true) {
+		console_command_step();
 	}
 }
