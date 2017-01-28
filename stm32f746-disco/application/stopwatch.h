@@ -3,8 +3,9 @@
 
 #include <stdbool.h>
 
-void stopwatch_reset(void);
+void stopwatch_start(void);
 bool stopwatch_step(void);
+void stopwatch_stop(void);
 
 inline const char * stopwatch_name(void)
 {

@@ -8,8 +8,9 @@
 #include <string.h>
 
 static bool command_received = false;
+static bool stop_received = false;
 
-static enum {
+static enum State {
 	STATE_IDLE,
 	STATE_STOPWATCH,
 } state = STATE_IDLE;
@@ -32,12 +33,12 @@ static void state_idle(void)
 	num_args = sscanf(console_command(), "%s%s%s%s%s%s%s%s", arg[0], arg[1],
 			arg[2], arg[3], arg[4], arg[5], arg[6], arg[7]);
 
-	if (num_args == EOF || num_args == 0) {
+	if (num_args <= 0) {
 		illegal_command();
 	} else {
 		--num_args;
 		if (!strcmp(arg[0], stopwatch_name())) {
-			stopwatch_reset();
+			stopwatch_start();
 			state = STATE_STOPWATCH;
 		} else {
 			illegal_command();
@@ -47,12 +48,19 @@ static void state_idle(void)
 
 static void state_stopwatch(void)
 {
-	if (!stopwatch_step())
+	if (stop_received) {
+		stopwatch_stop();
 		state = STATE_IDLE;
+	} else if (!stopwatch_step()) {
+		state = STATE_IDLE;
+	}
 }
 
 void console_command_step(void)
 {
+	if (command_received && console_stop_received())
+		stop_received = true;
+
 	switch (state) {
 	case STATE_IDLE:
 		state_idle();
@@ -64,6 +72,8 @@ void console_command_step(void)
 		assert(false);
 		break;
 	}
+
+	stop_received = false; // must have been handled in the state
 
 	if (command_received == true && state == STATE_IDLE) {
 		/*

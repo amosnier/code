@@ -7,8 +7,11 @@
 
 static const char TOP_LEFT[] = "\033[0;0H";
 static const char CLEAR[] = "\033[2J";
+static const char HIDE_CURSOR[] = "\033[?25l";
+static const char SHOW_CURSOR[] = "\033[?25h";
 static const char PROMPT[] = "\r\nf746-disco> ";
 
+static const char ETX = 3;
 static const char DEL = 127;
 
 static char rx_char;
@@ -50,6 +53,16 @@ void console_print_welcome(void)
 	printf(PROMPT);
 }
 
+void console_hide_cursor(void)
+{
+	printf(HIDE_CURSOR);
+}
+
+void console_show_cursor(void)
+{
+	printf(SHOW_CURSOR);
+}
+
 static inline bool rx_command_full(void)
 {
 	return rx_pos == command + sizeof command - 1;
@@ -82,6 +95,12 @@ void console_receive_completed(void)
 void console_receive_char(void)
 {
 	assert(HAL_UART_Receive_IT(&huart1, (uint8_t *) &rx_char, 1) == HAL_OK);
+}
+
+bool console_stop_received(void)
+{
+	char c;
+	return (HAL_UART_Receive(&huart1, (uint8_t *) &c, 1, 0) == HAL_OK && c == ETX);
 }
 
 void console_command_handled(void)
