@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <string.h>
 
-static bool command_received = false;
+static volatile bool command_received = false;
 static bool stop_received = false;
 
 static enum State {
