@@ -1,9 +1,9 @@
 #include "console.h"
 #include "hal_globals.h"
 #include <assert.h>
+#include <console_command.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <console_commands.h>
 
 static const char TOP_LEFT[] = "\033[0;0H";
 static const char CLEAR[] = "\033[2J";
@@ -16,8 +16,8 @@ static const char DEL = 127;
 
 static char rx_char;
 
-static char command[64];
-static char *rx_pos = command;
+static volatile char command[64];
+static volatile char *rx_pos = command;
 
 void console_init(void)
 {
@@ -112,5 +112,5 @@ void console_command_handled(void)
 
 const char * console_command(void)
 {
-	return command;
+	return (char *) command;
 }

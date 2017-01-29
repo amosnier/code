@@ -1,5 +1,5 @@
+#include <console_command.h>
 #include "console.h"
-#include "console_commands.h"
 #include <stdbool.h>
 
 void application(void)
