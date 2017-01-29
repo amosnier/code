@@ -4,11 +4,11 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-struct Command {
+typedef struct Command {
 	const char * name;
 	void (*start)(void);
 	bool (*step)(void);
 	void (*stop)(void);
-};
+} Command;
 
 #endif /* APPLICATION_CONSOLE_COMMAND_TABLE_H_ */

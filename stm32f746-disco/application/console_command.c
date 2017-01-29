@@ -8,11 +8,22 @@
 #include <console_command.h>
 #include <string.h>
 
-extern const struct Command commands[];
+extern const Command commands[];
 extern const size_t num_commands;
 
+static const Command *command;
+
+static bool illegal_step(void);
+
+static Command illegal_command = {
+		"illegal", NULL, illegal_step, NULL
+};
+
+static Command empty_command = {
+		"empty", NULL, NULL, NULL
+};
+
 static volatile bool command_received = false;
-static bool stop_received = false;
 
 static enum State {
 	STATE_IDLE,
@@ -26,19 +37,27 @@ int num_args = 0;
 
 size_t command_index;
 
-static void illegal_command(void)
+static bool illegal_step(void)
 {
 	printf("\"%s\" is illegal\r\n", console_command());
+	return false;
 }
 
-static bool find_command(size_t *index, const char *name)
+static const Command *find_command(const char *name)
 {
-	for (*index = 0; *index < num_commands; ++*index) {
-		if (!strcmp(name, commands[*index].name)) {
+	if (*name == 0)
+		return &empty_command;
+
+	const Command *cmd = &illegal_command;
+
+	for (size_t i = 0; i < num_commands; i++) {
+		if (!strcmp(name, commands[i].name)) {
+			cmd = &commands[i];
 			break;
 		}
 	}
-	return *index < num_commands;
+
+	return cmd;
 }
 
 static void state_idle(void)
@@ -53,33 +72,38 @@ static void state_idle(void)
 			arg[2], arg[3], arg[4], arg[5], arg[6], arg[7]);
 
 	if (num_args <= 0) {
-		illegal_command();
+		arg[0][0] = 0; // empty command ("")
+		num_args = 0;
 	} else {
 		--num_args;
-		if (find_command(&command_index, arg[0])) {
-			commands[command_index].start();
-			state = STATE_RUNNING;
-		} else {
-			illegal_command();
-		}
 	}
+
+	command = find_command(arg[0]);
+
+	if (command->start != NULL)
+		command->start();
+
+	state = STATE_RUNNING;
 }
 
 static void state_running(void)
 {
-	if (stop_received) {
-		commands[command_index].stop();
+	if (console_stop_received()) {
+		if (command->stop != NULL)
+			command->stop();
 		state = STATE_IDLE;
-	} else if (!commands[command_index].step()) {
+	} else if (command->step == NULL || !command->step()) {
 		state = STATE_IDLE;
+	}
+
+	if (state == STATE_IDLE) {
+		command_received = false;
+		console_command_handled();
 	}
 }
 
 void console_command_step(void)
 {
-	if (command_received && console_stop_received())
-		stop_received = true;
-
 	switch (state) {
 	case STATE_IDLE:
 		state_idle();
@@ -90,18 +114,6 @@ void console_command_step(void)
 	default:
 		assert(false);
 		break;
-	}
-
-	stop_received = false; // must have been handled in the state
-
-	if (command_received == true && state == STATE_IDLE) {
-		/*
-		 * We have received a command. We may or may not have gone through
-		 * a state corresponding to the command. In any case, when we are
-		 * (back) in the idle state, we have finished handling the command.
-		 */
-		command_received = false;
-		console_command_handled();
 	}
 }
 
