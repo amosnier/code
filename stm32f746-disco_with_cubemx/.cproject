@@ -48,7 +48,14 @@
 							<builder buildPath="${workspace_loc:/stm32f746-disco}/Release" id="ilg.gnuarmeclipse.managedbuild.cross.builder.961350289" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="ilg.gnuarmeclipse.managedbuild.cross.builder"/>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.771388045" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor.681057564" name="Use preprocessor" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.1657998690" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" useByScannerDiscovery="false" valueType="includePath"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.1657998690" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="../cubemx_out/Inc/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Device/ST/STM32F7xx/Include/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Include/"/>
+									<listOptionValue builtIn="false" value="../application"/>
+								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs.1044683465" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="STM32F746xx"/>
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
@@ -56,7 +63,14 @@
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.458108719" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.51462940" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.2059448478" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.2059448478" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="../cubemx_out/Inc/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Device/ST/STM32F7xx/Include/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Include/"/>
+									<listOptionValue builtIn="false" value="../application"/>
+								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs.1639877214" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="STM32F746xx"/>
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
@@ -64,7 +78,14 @@
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1891958381" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1302102841" name="Cross ARM C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler">
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.199801728" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.199801728" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="../cubemx_out/Inc/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Device/ST/STM32F7xx/Include/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/"/>
+									<listOptionValue builtIn="false" value="../cubemx_out/Drivers/CMSIS/Include/"/>
+									<listOptionValue builtIn="false" value="../application"/>
+								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.defs.107925577" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="STM32F746xx"/>
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
@@ -91,10 +112,10 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.linker.238571504" name="Cross ARM C++ Linker" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.linker">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.gcsections.743397701" name="Remove unused sections (-Xlinker --gc-sections)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.paths.1797594398" name="Library search path (-L)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.paths" useByScannerDiscovery="false" valueType="libPaths">
-									<listOptionValue builtIn="false" value="../linking"/>
+									<listOptionValue builtIn="false" value="../cubemx_out"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.scriptfile.2107957005" name="Script files (-T)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.scriptfile" useByScannerDiscovery="false" valueType="stringList">
-									<listOptionValue builtIn="false" value="script.ld"/>
+									<listOptionValue builtIn="false" value="STM32F746NGHx_FLASH.ld"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.nostart.573636547" name="Do not use standard start files (-nostartfiles)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.nostart" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.usenewlibnano.1284480448" name="Use newlib-nano (--specs=nano.specs)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.linker.usenewlibnano" useByScannerDiscovery="false" value="true" valueType="boolean"/>
