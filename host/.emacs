@@ -69,7 +69,6 @@
 ;; Org mode config
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "|" "DONE(d!)")))
-;; (setq org-log-done 'time)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
