@@ -66,9 +66,8 @@
 	  (lambda ()
 	    (ggtags-mode 1)))
 
-;; Org mode config
-(setq org-todo-keywords
-      '((sequence "TODO(t!)" "|" "DONE(d!)")))
+;; Org mode
+(setq org-html-doctype "html5")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HACK BEGIN
