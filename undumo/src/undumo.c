@@ -21,7 +21,7 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(640, 480, "undumo", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -34,17 +34,17 @@ int main(void)
 	/* Initialize GLAD with GLFW's extension fetcher */
 	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
+	/* Render here */
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	/* Swap front and back buffers */
+	glfwSwapBuffers(window);
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
-		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
-
-		/* Poll for and process events */
-		glfwPollEvents();
+		/* Wait for and process events */
+		glfwWaitEvents();
 	}
 
 	glfwTerminate();
