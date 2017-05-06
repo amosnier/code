@@ -68,7 +68,6 @@ int main(void)
 	glfwGetFramebufferSize(window, &width, &height);  
 	glViewport(0, 0, width, height);
 
-
 	/* Build and compile our shader program */
 	/* Vertex shader */
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -80,7 +79,7 @@ int main(void)
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		glGetShaderInfoLog(vertexShader, sizeof infoLog, NULL, infoLog);
 		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 	/* Fragment shader */
@@ -91,7 +90,7 @@ int main(void)
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		glGetShaderInfoLog(fragmentShader, sizeof infoLog, NULL, infoLog);
 		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 	/* Link shaders */
@@ -102,12 +101,11 @@ int main(void)
 	/* Check for linking errors */
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+		glGetProgramInfoLog(shaderProgram, sizeof infoLog, NULL, infoLog);
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 	}
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-
 
 	/* Set up vertex data (and buffer(s)) and attribute pointers */
 	GLfloat vertices[] = {
@@ -125,9 +123,9 @@ int main(void)
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof (GLfloat), (GLvoid*) 0);
 	glEnableVertexAttribArray(0);
 
 	/*
