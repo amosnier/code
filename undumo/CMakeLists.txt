@@ -5,7 +5,7 @@ project(undumo)
 include_directories(src)
 include_directories(contrib/glad/include)
 
-file(GLOB SRC "src/*.c")
+file(GLOB SRC "src/*.cpp")
 file(GLOB GLAD_SRC "contrib/glad/src/*.c")
 
 add_executable(${CMAKE_PROJECT_NAME} ${SRC} ${GLAD_SRC})
