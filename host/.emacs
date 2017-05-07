@@ -27,4 +27,5 @@
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'recompile)
 (global-set-key [f9] 'next-error)
+(global-set-key [f10] 'previous-error)
 (global-set-key [f12] 'kill-this-buffer)
