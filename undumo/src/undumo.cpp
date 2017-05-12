@@ -3,7 +3,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+#include "vertex_simple.glsl.h"
+#include "fragment_color.glsl.h"
+
+static const GLuint WIDTH = 800;
+static const GLuint HEIGHT = 600;
+
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
@@ -13,22 +19,6 @@ static void error_callback(int error, const char* description)
 {
 	std::cout << "ERROR::GLFW\n" << description << std::endl;
 }
-
-const GLuint WIDTH = 800, HEIGHT = 600;
-
-/* Shaders */
-const GLchar* vertexShaderSource = "#version 330 core\n"
-	"layout (location = 0) in vec3 position;\n"
-	"void main()\n"
-	"{\n"
-	"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-	"}\0";
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-	"out vec4 color;\n"
-	"void main()\n"
-	"{\n"
-	"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-	"}\n\0";
 
 int main(void)
 {
@@ -70,42 +60,44 @@ int main(void)
 
 	/* Build and compile our shader program */
 	/* Vertex shader */
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
+	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	GLchar *p = (GLchar *) vertex_simple_glsl;
+	glShaderSource(vertex_shader, 1, &p, (GLint *) &vertex_simple_glsl_len);
+	glCompileShader(vertex_shader);
 	/* Check for compile time errors */
 	GLint success;
-	GLchar infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	GLchar info_log[512];
+	glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(vertexShader, sizeof infoLog, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+		glGetShaderInfoLog(vertex_shader, sizeof info_log, NULL, info_log);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << info_log << std::endl;
 	}
 	/* Fragment shader */
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
+	GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	p = (GLchar *) fragment_color_glsl;
+	glShaderSource(fragment_shader, 1, &p, (GLint *) &fragment_color_glsl_len);
+	glCompileShader(fragment_shader);
 	/* Check for compile time errors */
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(fragmentShader, sizeof infoLog, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+		glGetShaderInfoLog(fragment_shader, sizeof info_log, NULL, info_log);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << info_log << std::endl;
 	}
 	/* Link shaders */
-	GLuint shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
+	GLuint shader_program = glCreateProgram();
+	glAttachShader(shader_program, vertex_shader);
+	glAttachShader(shader_program, fragment_shader);
+	glLinkProgram(shader_program);
 	/* Check for linking errors */
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 	if (!success) {
-		glGetProgramInfoLog(shaderProgram, sizeof infoLog, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+		glGetProgramInfoLog(shader_program, sizeof info_log, NULL, info_log);
+		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << info_log << std::endl;
 	}
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	glDeleteShader(vertex_shader);
+	glDeleteShader(fragment_shader);
 
 	/* Set up vertex data (and buffer(s)) and attribute pointers */
 	GLfloat vertices[] = {
@@ -156,7 +148,7 @@ int main(void)
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		/* Draw our first triangle */
-		glUseProgram(shaderProgram);
+		glUseProgram(shader_program);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);

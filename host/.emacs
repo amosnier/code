@@ -24,6 +24,7 @@
 
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
+(global-set-key [f6] 'imenu)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'recompile)
 (global-set-key [f9] 'next-error)
