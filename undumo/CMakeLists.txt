@@ -11,7 +11,7 @@ file(GLOB GLAD_SRC "contrib/glad/src/*.c")
 
 add_executable(${CMAKE_PROJECT_NAME} ${SRC} ${GLAD_SRC})
 
-# Copy GLSL file to target directory
+# Copy GLSL files to target directory
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/glsl $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>)
 
