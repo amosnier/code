@@ -3,8 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "vertex_simple.glsl.h"
-#include "fragment_color.glsl.h"
+#include "glsl.hpp"
 
 static const GLuint WIDTH = 800;
 static const GLuint HEIGHT = 600;
@@ -22,6 +21,8 @@ static void error_callback(int error, const char* description)
 
 int main(void)
 {
+	load_shader_strings();
+	
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit())
@@ -61,8 +62,7 @@ int main(void)
 	/* Build and compile our shader program */
 	/* Vertex shader */
 	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-	GLchar *p = (GLchar *) vertex_simple_glsl;
-	glShaderSource(vertex_shader, 1, &p, (GLint *) &vertex_simple_glsl_len);
+	glShaderSource(vertex_shader, 1, &SIMPLE_VERTEX_SHADER, nullptr);
 	glCompileShader(vertex_shader);
 	/* Check for compile time errors */
 	GLint success;
@@ -75,8 +75,7 @@ int main(void)
 	}
 	/* Fragment shader */
 	GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	p = (GLchar *) fragment_color_glsl;
-	glShaderSource(fragment_shader, 1, &p, (GLint *) &fragment_color_glsl_len);
+	glShaderSource(fragment_shader, 1, &COLOR_FRAGMENT_SHADER, nullptr);
 	glCompileShader(fragment_shader);
 	/* Check for compile time errors */
 	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);

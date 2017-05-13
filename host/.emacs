@@ -22,11 +22,15 @@
 ;; Smart tabs
 (add-hook 'c-mode-common-hook (lambda() (smart-tabs-insinuate 'c 'c++)))
 
+;; C-style comments in C++
+(add-hook 'c++-mode-hook (lambda () (setq comment-start "/* " comment-end   " */")))
+
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
-(global-set-key [f6] 'imenu)
+(global-set-key [f6] 'find-name-dired)
 (global-set-key [f7] 'compile)
 (global-set-key [f8] 'recompile)
 (global-set-key [f9] 'next-error)
 (global-set-key [f10] 'previous-error)
+(global-set-key [f11] 'imenu)
 (global-set-key [f12] 'kill-this-buffer)
