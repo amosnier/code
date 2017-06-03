@@ -117,5 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 # Alain
-export WORKON_HOME=~/custom/.virtualenvs
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+alias conda='/home/alain/custom/anaconda3/bin/conda'
+alias workon='source /home/alain/custom/anaconda3/bin/activate'
+alias deactivate='source /home/alain/custom/anaconda3/bin/deactivate'
