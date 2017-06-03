@@ -1,3 +1,0 @@
-[submodule "undumo/contrib/glfw"]
-	path = undumo/contrib/glfw
-	url = https://github.com/glfw/glfw.git
