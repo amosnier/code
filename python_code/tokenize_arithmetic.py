@@ -1,42 +1,41 @@
 OPERATORS = '+', '-', '*', '/'
 
 def tokenize(expression):
-    def state_none(c):
+    def token_state_none(c):
         if c.isdecimal():
-            self.token = c
-            self.state = state_number
+            state.token = c
+            state.token_state = token_state_number
         elif c in OPERATORS:
-            self.token = 'operator', c
-            self.token_ready = True
+            state.token = 'operator', c
+            state.token_ready = True
     
-    def state_number(c):
+    def token_state_number(c):
         if c.isdecimal():
-            self.token += c
+            state.token += c
         else:
-            self.char_consumed = False
-            self.token = 'number', self.token
-            self.token_ready = True
-            self.state = state_none
+            state.char_consumed = False
+            state.token = 'number', state.token
+            state.token_ready = True
+            state.token_state = token_state_none
 
     def interpret_character(c):
-        self.token_ready = False
-        self.char_consumed = True
-        self.state(c)
+        state.token_ready = False
+        state.char_consumed = True
+        state.token_state(c)
         
-    class self:
+    class state:
         token_ready = False
         token = None
         char_consumed = True
-        state = state_none
+        token_state = token_state_none
 
+    expression += ' ' # terminator for the last token in the expression
     for c in expression:
-        self.char_consumed = False
-        while not self.char_consumed:
+        state.char_consumed = False
+        while not state.char_consumed:
             interpret_character(c)
-            if self.token_ready:
-                yield self.token
-    if self.state == state_number:
-        yield 'number', self.token
+            if state.token_ready:
+                yield state.token
 
 def main():
     for x in tokenize('15+ 2 * 378 / 5'):
