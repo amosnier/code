@@ -32,6 +32,10 @@
 ;; C-style comments in C++
 (add-hook 'c++-mode-hook (lambda () (setq comment-start "/* " comment-end   " */")))
 
+;; Org mode HTML5
+(setq org-html-doctype "html5")
+(setq org-html-html5-fancy t)
+
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
 (global-set-key [f6] 'find-name-dired)
