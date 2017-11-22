@@ -36,13 +36,10 @@
 (setq org-html-doctype "html5")
 (setq org-html-html5-fancy t)
 
-;; Minimal indentation for HTML that requires _many_ levels of
+;; Minimal indentation for HTML and XML that require _many_ levels of
 ;; indentation.
-(add-hook 'html-mode-hook
-	  (lambda()
-            (setq sgml-basic-offset 2)
-            (setq indent-tabs-mode t)
-	    (setq tab-width 2)))
+(add-hook 'html-mode-hook (lambda() (setq tab-width 2)))
+(add-hook 'nxml-mode-hook (lambda() (setq tab-width 2)))
 
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
