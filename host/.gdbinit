@@ -1,1 +1,1 @@
-add-auto-load-safe-path ~/repos/montauban/
+add-auto-load-safe-path ~/repos/bare-code
