@@ -117,9 +117,4 @@ if ! shopt -oq posix; then
 fi
 
 # Alain
-alias conda='/home/alain/custom/anaconda3/bin/conda'
-alias activate='source /home/alain/custom/anaconda3/bin/activate'
-alias deactivate='source /home/alain/custom/anaconda3/bin/deactivate'
-
-# Alain
-PATH=$PATH:/opt/gcc-arm-none-eabi-6-2017-q2-update/bin
+export PATH=~/custom/anaconda3/bin:$PATH
