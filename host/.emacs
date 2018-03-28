@@ -39,7 +39,9 @@
 ;; Minimal indentation for HTML and XML that require _many_ levels of
 ;; indentation.
 (add-hook 'html-mode-hook (lambda() (setq tab-width 2)))
-(add-hook 'nxml-mode-hook (lambda() (setq tab-width 2)))
+
+;; Elpy for Python IDE
+(elpy-enable)
 
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
