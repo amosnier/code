@@ -118,3 +118,4 @@ fi
 
 # Alain
 export PATH=~/custom/anaconda3/bin:$PATH
+export NO_AT_BRIDGE=1 # workaround for dbus bug that trigger GTK warning
