@@ -59,7 +59,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (docker-compose-mode dockerfile-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
+    (web-mode docker-compose-mode dockerfile-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
