@@ -43,6 +43,10 @@
 ;; Elpy for Python IDE
 (elpy-enable)
 
+;; web-mode for HTML templates
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
 (global-set-key [f6] 'find-name-dired)
@@ -52,6 +56,7 @@
 (global-set-key [f10] 'previous-error)
 (global-set-key [f11] 'imenu)
 (global-set-key [f12] 'kill-this-buffer)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -66,3 +71,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+

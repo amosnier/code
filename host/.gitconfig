@@ -12,7 +12,6 @@
 	aa = add -A
 	tree = log --all --graph --decorate --pretty=oneline --abbrev-commit
 	ds = diff --staged
-[core]
 [credential]
 	helper = cache
 [push]
@@ -20,7 +19,7 @@
 [core]
 	editor = emacs
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
