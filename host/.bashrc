@@ -120,3 +120,9 @@ fi
 export PATH=~/custom/anaconda3/bin:$PATH
 export NO_AT_BRIDGE=1 # workaround for dbus bug that trigger GTK warning
 export PATH=~/custom/FreedomStudio/SiFive/riscv64-unknown-elf-gcc-20171231-x86_64-linux-centos6/bin:$PATH
+
+# Alain, Vulkan
+export VULKAN_SDK=~/custom/vulkan/latest/x86_64
+export PATH=$VULKAN_SDK/bin:$PATH
+export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
+export VK_LAYER_PATH=$VULKAN_SDK/etc/explicit_layer.d
