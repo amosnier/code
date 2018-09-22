@@ -16,26 +16,13 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's local bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# if [ -d "$HOME/nand2tetris/tools" ] ; then
-#     PATH="$HOME/nand2tetris/tools:$PATH"
-# fi
-
-if [ -d "$HOME/Qt/Tools/QtCreator/bin" ] ; then
-    PATH="$HOME/Qt/Tools/QtCreator/bin:$PATH"
-fi
-
-if [ -d "$HOME/cmake-3.3.2-Linux-x86_64/bin" ] ; then
-    PATH="$HOME/cmake-3.3.2-Linux-x86_64/bin:$PATH"
-fi
-
-export EDITOR=emacs
+# Alain, Vulkan
+export VULKAN_SDK=~/custom/vulkan/latest/x86_64
+export PATH=$VULKAN_SDK/bin:$PATH
+export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
+export VK_LAYER_PATH=$VULKAN_SDK/etc/explicit_layer.d
