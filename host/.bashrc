@@ -119,4 +119,4 @@ fi
 # Alain
 export PATH=~/custom/anaconda3/bin:$PATH
 export NO_AT_BRIDGE=1 # workaround for dbus bug that trigger GTK warning
-export PATH=~/custom/FreedomStudio/SiFive/riscv64-unknown-elf-gcc-20171231-x86_64-linux-centos6/bin:$PATH
+

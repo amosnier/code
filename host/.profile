@@ -22,7 +22,4 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # Alain, Vulkan
-export VULKAN_SDK=~/custom/vulkan/latest/x86_64
-export PATH=$VULKAN_SDK/bin:$PATH
-export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
-export VK_LAYER_PATH=$VULKAN_SDK/etc/explicit_layer.d
+source ~/custom/vulkan/latest/setup-env.sh
