@@ -22,4 +22,4 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # Alain, Vulkan
-source ~/custom/vulkan/latest/setup-env.sh
+source /opt/vulkan/latest/setup-env.sh
