@@ -1,7 +1,7 @@
 [user]
 	name = Alain Mosnier
 	email = alain@wanamoon.net
-	signingkey = 7B982B53F09626567AFA2545331DCAAEDE209451
+	signingkey = 331DCAAEDE209451
 [alias]
 	co = checkout
 	br = branch
