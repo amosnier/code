@@ -1,0 +1,2 @@
+* Create a branch at HEAD and discard the changes in any other branch with the same name
+=$ git checkout -B branch_name=
