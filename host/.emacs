@@ -32,6 +32,9 @@
 ;; C-style comments in C++
 (add-hook 'c++-mode-hook (lambda () (setq comment-start "/* " comment-end   " */")))
 
+;; No indent for namespaces
+(add-hook 'c++-mode-hook (lambda () (c-set-offset 'innamespace [0])))
+
 ;; Org mode HTML5
 (setq org-html-doctype "html5")
 (setq org-html-html5-fancy t)
