@@ -8,10 +8,7 @@
 (setq inhibit-splash-screen t)
 
 ;; Load theme
-(defun theme-init ()
-  (load-theme 'zenburn t)
-)
-(add-hook 'after-init-hook 'theme-init)
+(add-hook 'after-init-hook (lambda() (load-theme 'zenburn t)))
 
 ;; Configure font
 (set-face-attribute 'default (selected-frame) :height 100)
@@ -43,13 +40,12 @@
 (elpy-enable)
 
 ;; web-mode for HTML templates
-(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(defun web-mode-settings ()
+(defun configure-web-mode ()
   (setq web-mode-markup-indent-offset 2)
   (setq tab-width 2)
 )
-(add-hook 'web-mode-hook  'web-mode-settings)
+(add-hook 'web-mode-hook  'configure-web-mode)
 
 ;; Keyboard shorcuts
 (global-set-key [f5] 'rgrep)
