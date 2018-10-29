@@ -6,12 +6,17 @@
 (package-initialize)
 
 (setq inhibit-splash-screen t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; Load theme
 (add-hook 'after-init-hook (lambda() (load-theme 'zenburn t)))
 
+;; Global company-mode
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; Configure font
-(set-face-attribute 'default (selected-frame) :height 100)
+(set-face-attribute 'default nil :height 100)
 
 ;; Display columns
 (column-number-mode)
@@ -29,12 +34,41 @@
 ;; C-style comments in C++
 (add-hook 'c++-mode-hook (lambda () (setq comment-start "/* " comment-end   " */")))
 
-;; No indent for namespaces
+;; No indent for name-spaces,
 (add-hook 'c++-mode-hook (lambda () (c-set-offset 'innamespace [0])))
+
+;; Various settings for text-mode. Inherited among others by org-mode
+(defun configure-text-mode ()
+  (make-local-variable 'company-backends)
+  (add-to-list 'company-backends 'company-ispell)
+  (turn-on-auto-fill)
+  (flyspell-mode)
+  )
+(add-hook 'text-mode-hook 'configure-text-mode)
+
+(defun english ()
+  (interactive)
+  (ispell-change-dictionary "en")
+  (setq company-ispell-dictionary (file-truename "~/dict/english"))
+)
+(defun french ()
+  (interactive)
+  (ispell-change-dictionary "fr")
+  (setq company-ispell-dictionary (file-truename "~/dict/french"))
+  )
+(defun swedish ()
+  (interactive)
+  (ispell-change-dictionary "sv")
+  (setq company-ispell-dictionary (file-truename "~/dict/swedish"))
+  )
 
 ;; Org mode HTML5
 (setq org-html-doctype "html5")
 (setq org-html-html5-fancy t)
+
+;; Company mode in elisp mode
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook 'flyspell-prog-mode)
 
 ;; Elpy for Python IDE
 (elpy-enable)
@@ -47,7 +81,7 @@
 )
 (add-hook 'web-mode-hook  'configure-web-mode)
 
-;; Keyboard shorcuts
+;; Keyboard shortcuts
 (global-set-key [f5] 'rgrep)
 (global-set-key [f6] 'find-name-dired)
 (global-set-key [f7] 'compile)
@@ -64,7 +98,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode docker-compose-mode dockerfile-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
+    (company web-mode docker-compose-mode dockerfile-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
