@@ -39,8 +39,6 @@
 
 ;; Various settings for text-mode. Inherited among others by org-mode
 (defun configure-text-mode ()
-  (make-local-variable 'company-backends)
-  (add-to-list 'company-backends 'company-ispell)
   (turn-on-auto-fill)
   (flyspell-mode)
   )
@@ -49,17 +47,14 @@
 (defun english ()
   (interactive)
   (ispell-change-dictionary "en")
-  (setq company-ispell-dictionary (file-truename "~/dict/english"))
-)
+  )
 (defun french ()
   (interactive)
   (ispell-change-dictionary "fr")
-  (setq company-ispell-dictionary (file-truename "~/dict/french"))
   )
 (defun swedish ()
   (interactive)
   (ispell-change-dictionary "sv")
-  (setq company-ispell-dictionary (file-truename "~/dict/swedish"))
   )
 
 ;; Org mode HTML5
