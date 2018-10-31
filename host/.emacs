@@ -36,7 +36,14 @@
 ;; Irony
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(add-hook 'irony-mode-hook #'irony-eldoc)
 
 ;; Various settings for text-mode. Inherited among others by org-mode
 (defun configure-text-mode ()
@@ -99,7 +106,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (irony elpy smex company web-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
+    (irony-eldoc flycheck flycheck-irony company-irony irony elpy smex company web-mode magit zenburn-theme smart-tabs-mode glsl-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
