@@ -14,3 +14,5 @@ Make changes
 With gerrit:
 
 =$ git push-for-review=
+* Rebase HEAD, master to origin master
+=$git pull --rebase=
