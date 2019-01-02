@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Alain
-export PATH=~/custom/anaconda3/bin:$PATH
-export NO_AT_BRIDGE=1 # workaround for dbus bug that trigger GTK warning
-
+# Alain, for virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repos
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
