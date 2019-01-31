@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+
+\title{Att lösa [$\int_{3}^{9}\ln({x^2 -9})dx = \int_{0}^{a}\ln({x})dx$]}
+\author{Alain Mosnier}
+\date{2019/01/30}
+
+\begin{document}
+\maketitle
+
+\section {Ekvationen}
+\begin{equation}
+\int_{3}^{9}\ln({x^2 -9})dx = \int_{0}^{a}\ln({x})dx
+\end{equation}
+Lös ut a.
+\section {Generaliserade integraler}
+\item Först konstaterar vi att båda sidor av ekvationen är generaliserade integraler (funktionen $\ln$ är inte definierad för variabelvärdet noll). Vi behöver därför fundera på huruvida det vi försöker lösa faktiskt är en giltig ekvation.
+\item Vi har tur. Alla integraler på formen:
+\begin{equation}
+\int_{0}^{a}\ln({x})dx, a \in {\rm I\!R}_{>0}
+\end{equation}
+är konvergenta.
+För att bevisa det kan man till exempel konstatera att:
+\begin{equation}
+\int_{0}^{1}\ln({x})dx=\lim_{x \to 0}(x-x\ln x-1)=-1
+\end{equation}
+och att:
+\begin{equation}
+\forall a \in {\rm I\!R}_{>0}, \exists c \in {\rm I\!R} / \int_{0}^{a}\ln({x})dx=\int_{0}^{1}\ln({x})dx+c
+\end{equation}
+($c=\int_{a}^{1}ln({x})dx$ eller $c=\int_{1}^{a}ln({x})dx$, beroende på huruvida $a<1$ eller $a\geq1$)
+\section {Lösning}
+Efter att med några enkla steg ha konstaterat att:
+\begin{equation}
+\int_{3}^{9}\ln({x²-9})dx=\int_{0}^{12}\ln({x})dx
+\end{equation}
+så kan man dra slutsatsen att det bara finns en lösning: $a=12$.
+\section {Generalisering?}
+Anledningen att vänstertermen ovan går att förenkla på ett passande sätt är att $3+3=3²-3$. Går det att generalisera för fler värden än 3 och 9? Dvs vilka lösningar har ekvationen $2y=y²-y$?
+\item Svar: $y=0$ eller $y=3$.
+\item Ekvationen går alltså inte att generalisera på ett enkelt sätt.
+\end{document}
