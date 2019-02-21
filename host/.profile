@@ -21,5 +21,15 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# Alain, Vulkan
-source /opt/vulkan/latest/setup-env.sh
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Alain, Espressif
+if [ -d "$HOME/custom/xtensa-esp32-elf/bin" ] ; then
+    PATH="$HOME/custom/xtensa-esp32-elf/bin:$PATH"
+fi
+if [ -d "$HOME/custom/repos/esp-idf" ] ; then
+    export IDF_PATH="$HOME/custom/repos/esp-idf"
+fi
