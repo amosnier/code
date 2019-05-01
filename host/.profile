@@ -27,8 +27,8 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Alain, Espressif
-if [ -d "$HOME/custom/xtensa-esp32-elf/bin" ] ; then
-    PATH="$HOME/custom/xtensa-esp32-elf/bin:$PATH"
+if [ -d "$HOME/custom/packages-binary/xtensa-esp32-elf/bin" ] ; then
+    PATH="$HOME/custom/packages-binary/xtensa-esp32-elf/bin:$PATH"
 fi
 if [ -d "$HOME/custom/repos/esp-idf" ] ; then
     export IDF_PATH="$HOME/custom/repos/esp-idf"
