@@ -4,7 +4,9 @@
 The changes will be garbage collected.
 * Fix the commit history
 =$ git rebase -i 1ee5a7544d9514df4792fe68c1a38085b60ce64f~=
+
 Make changes
+
 =$ git aa=
 
 =$ git commit --amend=
