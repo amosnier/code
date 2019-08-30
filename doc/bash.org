@@ -1,5 +1,5 @@
 #+TITLE: Some bash tricks
 #+OPTIONS: html-postamble:nil
 
-* Recursive batch rename
+* Recursive file name pattern rename
 =find . -type f -name '*xyz*' -exec rename 's/xyz/abc/g' '{}' \;=
