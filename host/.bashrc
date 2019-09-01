@@ -117,6 +117,12 @@ if ! shopt -oq posix; then
 fi
 
 # Alain, for virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/repos
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/repos
+#source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+# Alain, for bash-git-prompt
+if [ -f "$HOME/bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source $HOME/bash-git-prompt/gitprompt.sh
+fi

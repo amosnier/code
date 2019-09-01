@@ -26,10 +26,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Alain, Espressif
-if [ -d "$HOME/custom/packages-binary/xtensa-esp32-elf/bin" ] ; then
-    PATH="$HOME/custom/packages-binary/xtensa-esp32-elf/bin:$PATH"
-fi
-if [ -d "$HOME/custom/repos/esp-idf" ] ; then
-    export IDF_PATH="$HOME/custom/repos/esp-idf"
-fi
+# Alain, my own Python modules
+export PYTHONPATH=$PYTHONPATH:~/python-modules
