@@ -28,3 +28,6 @@ fi
 
 # Alain, my own Python modules
 export PYTHONPATH=$PYTHONPATH:~/python-modules
+
+# Alain, Vulkan
+source /opt/vulkan/latest/setup-env.sh
