@@ -1,0 +1,34 @@
+#+TITLE: Some Linux tricks, mostly
+#+OPTIONS: html-postamble:nil
+
+* Bash CLI tricks
+** Recursive file name pattern rename
+=find . -type f -name '*xyz*' -exec rename 's/xyz/abc/g' '{}' \;=
+** Recursive search and replace in files
+=find . -type f -print0 | xargs -0 sed -i 's/xyz/abc/g'=
+
+* GNU Emacs tricks
+** With Ivy, use the current input instead of the current match
+This is useful in some situation, for instance when saving the current
+buffer under a new file name. The solution is =C-M-j=
+(=ivy-immediate-done=).
+* Miscellaneous
+** C-cedilla with a mean keyboard layout
+One could of course switch to a French layout and press the nine-key,
+but that seems like an overkill. And believe it or not, that does not
+even give you a solution for the capital c-cedilla! One other way to
+do it is to use the Unicode code for the character:
+
+- Ç: decimal =199=, hexadecimal =U+00C7=
+
+- ç: decimal =231=, hexadecimal =U+00E7=
+
+How you obtain the character from the Unicode code depends on the
+context. Under Windows, you would press the ALT-key followed by the
+decimal code.
+
+Under most applications in Linux, you press =CTRL-SHIFT-u=, followed
+by the hexadecimal code.
+
+Under GNU Emacs you would press =C-x u ENTER=, followed by the
+hexadecimal code and =ENTER= again (or =C-M-j= with Ivy). 

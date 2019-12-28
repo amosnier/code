@@ -1,7 +1,0 @@
-#+TITLE: Some bash tricks
-#+OPTIONS: html-postamble:nil
-
-* Recursive file name pattern rename
-=find . -type f -name '*xyz*' -exec rename 's/xyz/abc/g' '{}' \;=
-* Recursive search and replace in files
-=find . -type f -print0 | xargs -0 sed -i 's/xyz/abc/g'=
