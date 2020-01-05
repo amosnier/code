@@ -33,5 +33,5 @@ export PYTHONPATH=$PYTHONPATH:~/python-modules
 source /opt/vulkan/latest/setup-env.sh
 
 # Alain, numeric keypad dot
-setxkbmap -option kpdl:dot
+#setxkbmap -option kpdl:dot
 #setxkbmap -option kpdl:comma
