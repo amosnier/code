@@ -7,6 +7,10 @@
 ** Recursive search and replace in files
 =find . -type f -print0 | xargs -0 sed -i 's/xyz/abc/g'=
 
+** Change numeric keypad decimal symbol
+==setxkbmap -option kpdl:dot   # to dot== 
+==setxkbmap -option kpdl:comma # to comma==
+
 * GNU Emacs tricks
 ** With Ivy, use the current input instead of the current match
 This is useful in some situation, for instance when saving the current
