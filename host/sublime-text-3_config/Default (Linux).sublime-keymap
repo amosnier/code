@@ -1,4 +1,0 @@
-[
-	{ "keys": ["ctrl+<"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
-	{ "keys": ["f1"], "command": "dired", "args": { "immediate": true }	}
-]
